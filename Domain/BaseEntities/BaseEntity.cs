@@ -37,6 +37,16 @@ public abstract class BaseEntity<T>
     public DateTime? ModifiedAt { get; set; }
 
     /// <summary>
+    ///     حذف شده توسط
+    /// </summary>
+    public Guid? DeletedBy { get; set; }
+
+    /// <summary>
+    ///     تاریخ حذف
+    /// </summary>
+    public DateTime? DeletedAt { get; set; } // todo
+
+    /// <summary>
     ///     متد حذف
     /// </summary>
     public void SetDelete()
