@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using TaskManager.Application.IRepositories;
 using TaskManager.Application.Requests.Commands.Authentication;
+using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Domain.Entities.Jwt;
@@ -12,7 +13,7 @@ namespace TaskManager.Application.Handlers.Commands.Authentication;
 /// <summary>
 ///     هندلر خروج کاربر
 /// </summary>
-public class SignOutRequestHandler : IRequestHandler<SignOutRequest, SignOutRequestResponse>
+public class SignOutRequestHandler : IRequestHandler<SignOutRequest, ApiResponse<SignOutRequestResponse>>
 {
     private readonly IJwtRepository _jwtRepository;
     private readonly SignInManager<ApplicationUser> _signInManager;
@@ -23,10 +24,19 @@ public class SignOutRequestHandler : IRequestHandler<SignOutRequest, SignOutRequ
         _jwtRepository = jwtRepository;
     }
 
-    public async Task<SignOutRequestResponse> Handle(SignOutRequest request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<SignOutRequestResponse>> Handle(SignOutRequest request,
+        CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(request.Token))
-            return new SignOutRequestResponse { Message = "توکن معتبر ارسال نشده است." };
+            return new ApiResponse<SignOutRequestResponse>
+            {
+                Status = new StatusResponse
+                {
+                    Message = "توکن معتبر ارسال نشده است.",
+                    HasError = true
+                },
+                Data = null
+            };
 
         var token = request.Token.TrimStart();
 
@@ -55,9 +65,13 @@ public class SignOutRequestHandler : IRequestHandler<SignOutRequest, SignOutRequ
 
         await _signInManager.SignOutAsync();
 
-        return new SignOutRequestResponse
+        return new ApiResponse<SignOutRequestResponse>
         {
-            Message = "با موفقیت خارج شدید"
+            Status = new StatusResponse
+            {
+                Message = "با موفقیت خارج شدید"
+            },
+            Data = null
         };
     }
 }

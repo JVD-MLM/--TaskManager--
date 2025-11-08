@@ -3,6 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using TaskManager.Application.Requests.Commands.Authentication;
+using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Domain.Entities.Identity;
 
@@ -11,7 +12,7 @@ namespace TaskManager.Application.Handlers.Commands.Authentication;
 /// <summary>
 ///     هندلر ثبت نام کاربر
 /// </summary>
-public class SignUpRequestHandler : IRequestHandler<SignUpRequest, SignUpRequestResponse>
+public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<SignUpRequestResponse>>
 {
     private readonly IMapper _mapper;
     private readonly UserManager<ApplicationUser> _userManager;
@@ -25,17 +26,21 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, SignUpRequest
         _validator = validator;
     }
 
-    public async Task<SignUpRequestResponse> Handle(SignUpRequest request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<SignUpRequestResponse>> Handle(SignUpRequest request,
+        CancellationToken cancellationToken)
     {
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
-        {
-            return new SignUpRequestResponse
+            return new ApiResponse<SignUpRequestResponse>
             {
-                Message = "حساب کاربری ساخته نشد"
+                Status = new StatusResponse
+                {
+                    Message = "حساب کاربری ساخته نشد",
+                    HasError = true
+                },
+                Data = null
             };
-        }
 
         var user = _mapper.Map<ApplicationUser>(request);
 
@@ -47,15 +52,24 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, SignUpRequest
 
             if (!roleExists) await _userManager.AddToRoleAsync(user, "Employee");
 
-            return new SignUpRequestResponse
+            return new ApiResponse<SignUpRequestResponse>
             {
-                Message = "حساب کاربری با موفقیت ساخته شد"
+                Status = new StatusResponse
+                {
+                    Message = "حساب کاربری با موفقیت ساخته شد"
+                },
+                Data = null
             };
         }
 
-        return new SignUpRequestResponse
+        return new ApiResponse<SignUpRequestResponse>
         {
-            Message = "حساب کاربری ساخته نشد"
+            Status = new StatusResponse
+            {
+                Message = "حساب کاربری ساخته نشد",
+                HasError = true
+            },
+            Data = null
         };
     }
 }

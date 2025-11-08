@@ -15,7 +15,7 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
             .MinimumLength(3).WithMessage("نام کاربری باید حداقل 3 کاراکتر باشد");
 
         RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("یمیل الزامی است.")
+            .NotEmpty().WithMessage("ایمیل الزامی است")
             .EmailAddress().WithMessage("ایمیل وارد شده معتبر نیست");
 
         RuleFor(x => x.Password)

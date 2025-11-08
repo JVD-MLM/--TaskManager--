@@ -5,8 +5,4 @@
 /// </summary>
 public class SignOutRequestResponse
 {
-    /// <summary>
-    ///     پیغام خروج
-    /// </summary>
-    public string Message { get; set; }
 }

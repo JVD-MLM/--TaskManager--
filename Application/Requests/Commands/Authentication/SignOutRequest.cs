@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
 
 namespace TaskManager.Application.Requests.Commands.Authentication;
@@ -6,7 +7,7 @@ namespace TaskManager.Application.Requests.Commands.Authentication;
 /// <summary>
 ///     درخواست خروج کاربر
 /// </summary>
-public class SignOutRequest : IRequest<SignOutRequestResponse>
+public class SignOutRequest : IRequest<ApiResponse<SignOutRequestResponse>>
 {
     /// <summary>
     ///     توکن

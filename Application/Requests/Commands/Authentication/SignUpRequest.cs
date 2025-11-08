@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Domain.Entities.Identity;
 
@@ -7,7 +8,7 @@ namespace TaskManager.Application.Requests.Commands.Authentication;
 /// <summary>
 ///     درخواست ثبت نام کاربر
 /// </summary>
-public class SignUpRequest : IRequest<SignUpRequestResponse>
+public class SignUpRequest : IRequest<ApiResponse<SignUpRequestResponse>>
 {
     /// <summary>
     ///     نام کاربری

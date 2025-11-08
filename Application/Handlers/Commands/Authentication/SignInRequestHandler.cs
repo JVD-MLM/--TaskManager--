@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using TaskManager.Application.Requests.Commands.Authentication;
+using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Domain.Entities.Identity;
 
@@ -14,7 +15,7 @@ namespace TaskManager.Application.Handlers.Commands.Authentication;
 /// <summary>
 ///     هندلر ورود کاربر
 /// </summary>
-public class SignInRequestHandler : IRequestHandler<SignInRequest, SignInRequestResponse>
+public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<SignInRequestResponse>>
 {
     private readonly IConfiguration _configuration;
     private readonly UserManager<ApplicationUser> _userManager;
@@ -25,7 +26,8 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, SignInRequest
         _configuration = configuration;
     }
 
-    public async Task<SignInRequestResponse> Handle(SignInRequest request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<SignInRequestResponse>> Handle(SignInRequest request,
+        CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -52,21 +54,32 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, SignInRequest
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
             );
 
-            return new SignInRequestResponse
+            return new ApiResponse<SignInRequestResponse>
             {
-                Message = "ورود با موفقیت انجام شد",
-                Username = user.UserName,
-                FirstName = user.FirstName ?? "",
-                LastName = user.LastName ?? "",
-                RoleName = userRoles.FirstOrDefault() ?? "",
-                ExpiredAt = $"{token.ValidTo}",
-                Token = "Bearer " + new JwtSecurityTokenHandler().WriteToken(token)
+                Status = new StatusResponse
+                {
+                    Message = "ورود با موفقیت انجام شد"
+                },
+                Data = new SignInRequestResponse
+                {
+                    Username = user.UserName,
+                    FirstName = user.FirstName ?? "",
+                    LastName = user.LastName ?? "",
+                    RoleName = userRoles.FirstOrDefault() ?? "",
+                    ExpiredAt = $"{token.ValidTo}",
+                    Token = "Bearer " + new JwtSecurityTokenHandler().WriteToken(token)
+                }
             };
         }
 
-        return new SignInRequestResponse
+        return new ApiResponse<SignInRequestResponse>
         {
-            Message = "ورود انجام نشد",
+            Status = new StatusResponse
+            {
+                Message = "ورود انجام نشد",
+                HasError = true
+            },
+            Data = null
         };
     }
 }

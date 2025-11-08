@@ -6,11 +6,6 @@
 public class SignInRequestResponse
 {
     /// <summary>
-    ///     پیغام ثبت نام
-    /// </summary>
-    public string Message { get; set; }
-
-    /// <summary>
     ///     توکن
     /// </summary>
     public string Token { get; set; }

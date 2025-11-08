@@ -5,8 +5,4 @@
 /// </summary>
 public class SignUpRequestResponse
 {
-    /// <summary>
-    ///     پیغام ثبت نام
-    /// </summary>
-    public string Message { get; set; }
 }
