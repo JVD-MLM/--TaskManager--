@@ -3,10 +3,11 @@
 /// <summary>
 ///     پاسخ وضعیت
 /// </summary>
+/// <param name="hasError">ارور دارد / ندارد</param>
 public class StatusResponse(bool hasError)
 {
     /// <summary>
-    ///     ارور
+    ///     ارور دارد / ندارد
     /// </summary>
     public bool HasError { get; set; } = hasError;
 
