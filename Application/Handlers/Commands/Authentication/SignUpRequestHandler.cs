@@ -32,15 +32,14 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
-        {
-            var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-
             return new ApiResponse<SignUpRequestResponse>
             {
-                Status = new StatusResponse(true) { Errors = errors },
+                Status = new StatusResponse(true)
+                {
+                    Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList() // ارور هاي validation
+                },
                 Data = null
             };
-        }
 
         var user = _mapper.Map<ApplicationUser>(request);
 
@@ -61,7 +60,10 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
 
         return new ApiResponse<SignUpRequestResponse>
         {
-            Status = new StatusResponse(true),
+            Status = new StatusResponse(true)
+            {
+                Errors = createUser.Errors.Select(e => e.Description).ToList() // ارور هاي identity
+            },
             Data = null
         };
     }
