@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using TaskManager.Application.Requests.Commands.Authentication;
-using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Domain.Entities.Identity;
@@ -57,10 +56,7 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
 
             return new ApiResponse<SignInRequestResponse>
             {
-                Status = new StatusResponse
-                {
-                    Message = "ورود با موفقیت انجام شد"
-                },
+                Status = new StatusResponse(false),
                 Data = new SignInRequestResponse
                 {
                     Username = user.UserName,
@@ -75,11 +71,7 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
 
         return new ApiResponse<SignInRequestResponse>
         {
-            Status = new StatusResponse
-            {
-                Message = "ورود انجام نشد",
-                HasError = true
-            },
+            Status = new StatusResponse(true),
             Data = null
         };
     }

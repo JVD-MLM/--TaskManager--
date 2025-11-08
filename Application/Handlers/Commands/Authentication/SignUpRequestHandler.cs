@@ -3,7 +3,6 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using TaskManager.Application.Requests.Commands.Authentication;
-using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Domain.Entities.Identity;
@@ -35,11 +34,7 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
         if (!validationResult.IsValid)
             return new ApiResponse<SignUpRequestResponse>
             {
-                Status = new StatusResponse
-                {
-                    Message = "حساب کاربری ساخته نشد",
-                    HasError = true
-                },
+                Status = new StatusResponse(true),
                 Data = null
             };
 
@@ -55,21 +50,14 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
 
             return new ApiResponse<SignUpRequestResponse>
             {
-                Status = new StatusResponse
-                {
-                    Message = "حساب کاربری با موفقیت ساخته شد"
-                },
+                Status = new StatusResponse(false),
                 Data = null
             };
         }
 
         return new ApiResponse<SignUpRequestResponse>
         {
-            Status = new StatusResponse
-            {
-                Message = "حساب کاربری ساخته نشد",
-                HasError = true
-            },
+            Status = new StatusResponse(true),
             Data = null
         };
     }

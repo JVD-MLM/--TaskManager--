@@ -3,15 +3,15 @@
 /// <summary>
 ///     پاسخ وضعیت
 /// </summary>
-public class StatusResponse
+public class StatusResponse(bool hasError)
 {
     /// <summary>
     ///     ارور
     /// </summary>
-    public bool HasError { get; set; } = false;
+    public bool HasError { get; set; } = hasError;
 
     /// <summary>
     ///     پیام
     /// </summary>
-    public string Message { get; set; }
+    public string Message { get; set; } = hasError ? "خطا در عمليات" : "عمليات موفق";
 }

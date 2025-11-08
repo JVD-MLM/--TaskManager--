@@ -31,11 +31,7 @@ public class SignOutRequestHandler : IRequestHandler<SignOutRequest, ApiResponse
         if (string.IsNullOrWhiteSpace(request.Token))
             return new ApiResponse<SignOutRequestResponse>
             {
-                Status = new StatusResponse
-                {
-                    Message = "توکن معتبر ارسال نشده است.",
-                    HasError = true
-                },
+                Status = new StatusResponse(true),
                 Data = null
             };
 
@@ -68,10 +64,7 @@ public class SignOutRequestHandler : IRequestHandler<SignOutRequest, ApiResponse
 
         return new ApiResponse<SignOutRequestResponse>
         {
-            Status = new StatusResponse
-            {
-                Message = "با موفقیت خارج شدید"
-            },
+            Status = new StatusResponse(false),
             Data = null
         };
     }
