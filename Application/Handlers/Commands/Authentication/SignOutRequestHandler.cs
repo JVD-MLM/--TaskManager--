@@ -5,6 +5,7 @@ using TaskManager.Application.IRepositories;
 using TaskManager.Application.Requests.Commands.Authentication;
 using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
+using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Domain.Entities.Jwt;
 

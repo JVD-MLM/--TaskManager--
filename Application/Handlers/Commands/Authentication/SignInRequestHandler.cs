@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using TaskManager.Application.Requests.Commands.Authentication;
 using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
+using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Domain.Entities.Identity;
 
 namespace TaskManager.Application.Handlers.Commands.Authentication;

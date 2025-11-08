@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using TaskManager.Application.Responses;
 using TaskManager.Application.Responses.Authentication;
+using TaskManager.Application.Responses.BaseResponses;
 
 namespace TaskManager.Application.Requests.Commands.Authentication;
 

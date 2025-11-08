@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Application.Responses;
+﻿namespace TaskManager.Application.Responses.BaseResponses;
 
 /// <summary>
 ///     پاسخ وضعیت
