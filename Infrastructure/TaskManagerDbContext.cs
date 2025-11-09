@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using TaskManager.Domain.BaseEntities;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Domain.Entities.Jwt;
+using TaskManager.Domain.Entities.Project;
+using Task = TaskManager.Domain.Entities.Task.Task;
 
 namespace TaskManager.Infrastructure;
 
@@ -15,10 +17,19 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+
+        base.OnModelCreating(builder);
+    }
+
     #region Tables
 
     public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<RevokedToken> RevokedTokens { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<Task> Tasks { get; set; }
 
     #endregion
 
