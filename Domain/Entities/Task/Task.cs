@@ -35,10 +35,10 @@ public class Task : BaseEntity<Guid>
     /// <summary>
     ///     نیاز به تایید
     /// </summary>
-    public bool IsApproveNeed { get; set; }
+    public bool NeedApprove { get; set; }
 
     /// <summary>
-    ///     تایید کننده
+    ///     تایید شده توسط
     /// </summary>
     public Guid ApprovedBy { get; set; }
 
