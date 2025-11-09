@@ -12,5 +12,6 @@ public static class InfrastructureServicesRegistration
     public static void ConfigureInfrastructureServices(this IServiceCollection services)
     {
         services.AddScoped<IJwtRepository, JwtRepository>();
+        services.AddScoped<IProjectRepository, ProjectRepository>();
     }
 }

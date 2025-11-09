@@ -12,11 +12,6 @@ public class JwtRepository : BaseRepository, IJwtRepository
     {
     }
 
-    /// <summary>
-    ///     ابطال توکن
-    /// </summary>
-    /// <param name="token"></param>
-    /// <returns></returns>
     public async Task RevokeToken(RevokedToken token)
     {
         await _context.RevokedTokens.AddAsync(token);

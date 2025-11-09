@@ -14,7 +14,7 @@ public abstract class BaseEntity<T>
     /// <summary>
     ///     حذف شده / نشده
     /// </summary>
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     /// <summary>
     ///     ایجاد شده توسط
