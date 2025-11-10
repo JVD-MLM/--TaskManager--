@@ -26,7 +26,8 @@ public class GetAllProjectsByFilterRequestHandler : IRequestHandler<GetAllProjec
     public async Task<ApiResponse<GetAllProjectsByFilterRequestResponse>> Handle(GetAllProjectsByFilterRequest request,
         CancellationToken cancellationToken)
     {
-        var projects = await _projectRepository.GetAllByFilterAsync(request.Title, request.Page.Value,
+        var projects = await _projectRepository.GetAllByFilterAsync(request.Title, request.IsComplete,
+            request.Page.Value,
             request.PageSize.Value, cancellationToken);
 
         var result = _mapper.Map<List<ProjectDto>>(projects);

@@ -44,7 +44,7 @@ public interface IProjectRepository
     /// <param name="isComplete"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<List<Project>> GetAllByFilterAsync(string? title, int page, int pageSize,
+    Task<List<Project>> GetAllByFilterAsync(string? title, int? isComplete, int page, int pageSize,
         CancellationToken cancellationToken);
 
     /// <summary>

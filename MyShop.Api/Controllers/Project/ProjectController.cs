@@ -66,6 +66,7 @@ public class ProjectController : ControllerBase
         var response = await _mediator.Send(new GetAllProjectsByFilterRequest
         {
             Title = request.Title,
+            IsComplete = request.IsComplete,
             Page = request.Page,
             PageSize = request.PageSize
         });
