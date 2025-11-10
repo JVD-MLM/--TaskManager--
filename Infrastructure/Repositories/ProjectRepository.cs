@@ -47,8 +47,10 @@ public class ProjectRepository : BaseRepository, IProjectRepository
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public Task DeleteAsync()
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var project = await GetAsync(id, cancellationToken);
+        project.SetDelete();
+        await UpdateAsync(project, cancellationToken);
     }
 }

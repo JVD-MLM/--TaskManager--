@@ -43,5 +43,11 @@ public interface IProjectRepository
     /// <returns></returns>
     Task UpdateAsync(Project project, CancellationToken cancellationToken);
 
-    Task DeleteAsync();
+    /// <summary>
+    ///     حذف پروژه
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

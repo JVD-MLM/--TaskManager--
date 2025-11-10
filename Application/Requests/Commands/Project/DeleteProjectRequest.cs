@@ -2,12 +2,12 @@
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Application.Responses.Project;
 
-namespace TaskManager.Application.Requests.Queries.Project;
+namespace TaskManager.Application.Requests.Commands.Project;
 
 /// <summary>
-///     درخواست دريافت پروژه
-/// </summary>
-public class GetProjectRequest : IRequest<ApiResponse<GetProjectRequestResponse>>
+///     درخواست حذف پروژه
+/// </summary
+public class DeleteProjectRequest : IRequest<ApiResponse<DeleteProjectRequestResponse>>
 {
     /// <summary>
     ///     آي دي

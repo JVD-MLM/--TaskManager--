@@ -65,4 +65,18 @@ public class ProjectController : ControllerBase
 
         return Ok(response);
     }
+
+    [Authorize]
+    [HttpPost("delete-project")]
+    [Description("حذف پروژه")]
+    public async Task<IActionResult> DeleteProject([FromBody] DeleteProjectRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new DeleteProjectRequest
+        {
+            Id = request.Id
+        });
+
+        return Ok(response);
+    }
 }

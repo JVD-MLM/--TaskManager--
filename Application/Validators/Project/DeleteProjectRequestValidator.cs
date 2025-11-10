@@ -4,19 +4,12 @@ using TaskManager.Application.Requests.Commands.Project;
 
 namespace TaskManager.Application.Validators.Project;
 
-/// <summary>
-///     وليديتور ويرايش پروژه
-/// </summary>
-public class UpdateProjectRequestValidator : AbstractValidator<UpdateProjectRequest>
+public class DeleteProjectRequestValidator:AbstractValidator<DeleteProjectRequest>
 {
-    public UpdateProjectRequestValidator(IProjectRepository projectRepository)
+    public DeleteProjectRequestValidator(IProjectRepository projectRepository)
     {
         RuleFor(x => x.Id)
             .MustAsync(async (id, cancellationToken) => await projectRepository.IsExist(id, cancellationToken))
             .WithMessage("رکورد مورد نظر یافت نشد");
-
-        RuleFor(x => x.Title)
-            .NotEmpty()
-            .WithMessage("عنوان نمی‌تواند خالی باشد");
     }
 }
