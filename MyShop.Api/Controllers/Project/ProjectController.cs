@@ -58,6 +58,21 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("get-all-projects-by-filter")]
+    [Description("دريافت همه پروژه ها با فيلتر")]
+    public async Task<IActionResult> GetAllProjectsByFilter([FromQuery] GetAllProjectsByFilterRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllProjectsByFilterRequest
+        {
+            Title = request.Title,
+            Page = request.Page,
+            PageSize = request.PageSize
+        });
+
+        return Ok(response);
+    }
+
     [Authorize]
     [HttpPost("edit-project")]
     [Description("ويرايش پروژه")]

@@ -31,9 +31,21 @@ public interface IProjectRepository
     /// <returns></returns>
     Task<Project> GetAsync(Guid id, CancellationToken cancellationToken);
 
+    /// <summary>
+    ///     دريافت همه پروژه ها
+    /// </summary>
+    /// <returns></returns>
     Task<List<Project>> GetAllAsync();
 
-    Task<List<Project>> GetAllByFilterAsync();
+    /// <summary>
+    ///     دريافت همه پروژه ها با فيلتر
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="isComplete"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<Project>> GetAllByFilterAsync(string? title, int page, int pageSize,
+        CancellationToken cancellationToken);
 
     /// <summary>
     ///     ويرايش پروژه

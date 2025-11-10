@@ -37,11 +37,6 @@ public class ProjectRepository : BaseRepository, IProjectRepository
         return result;
     }
 
-    public Task<List<Project>> GetAllByFilterAsync()
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task UpdateAsync(Project project, CancellationToken cancellationToken)
     {
         _context.Projects.Update(project);
@@ -53,5 +48,18 @@ public class ProjectRepository : BaseRepository, IProjectRepository
         var project = await GetAsync(id, cancellationToken);
         project.SetDelete();
         await UpdateAsync(project, cancellationToken);
+    }
+
+    public async Task<List<Project>> GetAllByFilterAsync(string? title, int page, int pageSize,
+        CancellationToken cancellationToken)
+    {
+        var query = _context.Projects.AsQueryable();
+
+        if (!string.IsNullOrEmpty(title))
+            query = query.Where(x => x.Title.Contains(title));
+
+        var result = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+
+        return result;
     }
 }
