@@ -50,7 +50,7 @@ public class GetProjectRequestHandler : IRequestHandler<GetProjectRequest, ApiRe
             Status = new StatusResponse(false),
             Data = new GetProjectRequestResponse
             {
-                ProjectDto = result
+                Item = result
             }
         };
     }
