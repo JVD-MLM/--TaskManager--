@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.Requests.Commands.Project;
 
@@ -19,6 +20,7 @@ public class ProjectController : ControllerBase
         _mediator = mediator;
     }
 
+    [Authorize]
     [HttpPost("create-project")]
     [Description("ایجاد پروژه")]
     public async Task<IActionResult> CreateProject([FromBody] CreateProjectRequest request,

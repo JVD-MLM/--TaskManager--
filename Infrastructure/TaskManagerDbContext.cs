@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TaskManager.Application.IServices.Authentication;
 using TaskManager.Domain.BaseEntities;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Domain.Entities.Jwt;
@@ -13,8 +14,17 @@ namespace TaskManager.Infrastructure;
 /// </summary>
 public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
 {
-    public TaskManagerDbContext(DbContextOptions<TaskManagerDbContext> options) : base(options)
+    private readonly IAuthService _authService;
+
+    public TaskManagerDbContext(DbContextOptions<TaskManagerDbContext> options) :
+        base(options) // كانستراكتور براي فكتوري
     {
+    }
+
+    public TaskManagerDbContext(DbContextOptions<TaskManagerDbContext> options, // كانستراكتور عادي
+        IAuthService authenticationService) : base(options)
+    {
+        _authService = authenticationService;
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -33,7 +43,7 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
 
     #endregion
 
-    #region CreatedAt & ModifiedAt Set
+    #region CreatedAt&By & ModifiedAt&By Set
 
     public override int SaveChanges()
     {
@@ -50,6 +60,7 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
     private void UpdateTimestamps()
     {
         var now = DateTime.UtcNow;
+        var userId = _authService.GetCurrentUserId();
 
         var baseEntityEntries = ChangeTracker.Entries()
             .Where(e =>
@@ -57,24 +68,33 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
                 e.Entity.GetType().BaseType.GetGenericTypeDefinition() == typeof(BaseEntity<>))
             .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-        foreach (var entry in baseEntityEntries)
+        foreach (var entry in baseEntityEntries) // پر كردن مقادير براي بيس انتيتي
         {
             var entity = entry.Entity;
             var createdAtProp = entity.GetType().GetProperty("CreatedAt");
             var modifiedAtProp = entity.GetType().GetProperty("ModifiedAt");
+            var createdByProp = entity.GetType().GetProperty("CreatedBy");
+            var modifiedByProp = entity.GetType().GetProperty("ModifiedBy");
 
-            if (entry.State == EntityState.Added && createdAtProp != null)
-                createdAtProp.SetValue(entity, now);
+            if (entry.State == EntityState.Added)
+            {
+                createdAtProp?.SetValue(entity, now);
+                if (userId.HasValue)
+                    createdByProp?.SetValue(entity, userId.Value);
+            }
 
-            if (entry.State == EntityState.Modified && modifiedAtProp != null)
-                modifiedAtProp.SetValue(entity, now);
+            if (entry.State == EntityState.Modified)
+            {
+                modifiedAtProp?.SetValue(entity, now);
+                if (userId.HasValue)
+                    modifiedByProp?.SetValue(entity, userId.Value);
+            }
         }
 
         var userEntries = ChangeTracker.Entries<ApplicationUser>()
             .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-
-        foreach (var entry in userEntries)
+        foreach (var entry in userEntries) // پر كردن مقادير براي انتيتي يوزر
         {
             var user = entry.Entity;
 

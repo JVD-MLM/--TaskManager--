@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TaskManager.Application.IRepositories;
+using TaskManager.Application.IServices.Authentication;
 using TaskManager.Infrastructure.Repositories;
+using TaskManager.Infrastructure.Services;
 
 namespace TaskManager.Infrastructure;
 
@@ -13,5 +15,6 @@ public static class InfrastructureServicesRegistration
     {
         services.AddScoped<IJwtRepository, JwtRepository>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
+        services.AddScoped<IAuthService, AuthService>();
     }
 }
