@@ -7,5 +7,5 @@ namespace TaskManager.Application.Responses.Project;
 /// </summary>
 public class GetProjectRequestResponse
 {
-    public ProjectDto ProjectDto { get; set; }
+    public ProjectDto Item { get; set; }
 }

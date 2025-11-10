@@ -49,6 +49,15 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("get-all-projects")]
+    [Description("دريافت همه پروژه ها")]
+    public async Task<IActionResult> GetAllProjects(CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllProjectsRequest());
+
+        return Ok(response);
+    }
+
     [Authorize]
     [HttpPost("edit-project")]
     [Description("ويرايش پروژه")]

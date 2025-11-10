@@ -33,7 +33,8 @@ public class ProjectRepository : BaseRepository, IProjectRepository
 
     public Task<List<Project>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var result = _context.Projects.ToListAsync();
+        return result;
     }
 
     public Task<List<Project>> GetAllByFilterAsync()
