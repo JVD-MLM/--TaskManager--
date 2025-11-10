@@ -7,13 +7,6 @@ namespace TaskManager.Domain.Entities.Project;
 /// </summary>
 public class Project : BaseEntity<Guid>
 {
-    public Project(string title, string? description, bool isComplete)
-    {
-        Title = title;
-        Description = description;
-        IsComplete = isComplete;
-    }
-
     /// <summary>
     ///     عنوان
     /// </summary>
@@ -41,6 +34,12 @@ public class Project : BaseEntity<Guid>
 
     #region Methods
 
+    /// <summary>
+    ///     متد ويرايش
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="description"></param>
+    /// <param name="isComplete"></param>
     public void Update(string title, string? description, bool isComplete)
     {
         Title = title;
