@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Application.IServices.Authentication;
+﻿namespace TaskManager.Application.IServices;
 
 /// <summary>
 ///     اينترفيس احراز هويت

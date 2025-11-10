@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Application.IServices.Authentication;
+using TaskManager.Application.IServices;
 using TaskManager.Domain.BaseEntities;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Domain.Entities.Jwt;

@@ -7,13 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\Authentication\**" />
+    <EmbeddedResource Remove="DTOs\Authentication\**" />
+    <None Remove="DTOs\Authentication\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Domain\TaskManager.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="QueryDTOs\Authentication\" />
-    <Folder Include="Handlers\Queries\" />
-    <Folder Include="Requests\Queries\" />
+    <Folder Include="Requests\Queries\Project\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,11 +4,11 @@ using TaskManager.Application.Requests.Commands.Project;
 namespace TaskManager.Application.Validators.Project;
 
 /// <summary>
-///     وليديتور ساخت پروژه
+///     وليديتور ويرايش پروژه
 /// </summary>
-public class CreateProjectRequestValidator : AbstractValidator<CreateProjectRequest>
+public class UpdateProjectRequestValidator : AbstractValidator<UpdateProjectRequest>
 {
-    public CreateProjectRequestValidator()
+    public UpdateProjectRequestValidator()
     {
         RuleFor(x => x.Title)
             .NotEmpty()

@@ -1,4 +1,5 @@
-﻿using TaskManager.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using TaskManager.Application.IRepositories;
 using TaskManager.Domain.Entities.Project;
 
 namespace TaskManager.Infrastructure.Repositories;
@@ -12,16 +13,22 @@ public class ProjectRepository : BaseRepository, IProjectRepository
     {
     }
 
+    public async Task<bool> IsExist(Guid id, CancellationToken cancellationToken)
+    {
+        var result = await _context.Projects.AnyAsync(x => x.Id == id, cancellationToken);
+        return result;
+    }
+
     public async Task AddAsync(Project project, CancellationToken cancellationToken)
     {
         await _context.Projects.AddAsync(project, cancellationToken);
-
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public Task<Project> GetAsync()
+    public async Task<Project> GetAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Projects.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return result;
     }
 
     public Task<List<Project>> GetAllAsync()
@@ -34,9 +41,10 @@ public class ProjectRepository : BaseRepository, IProjectRepository
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync()
+    public async Task UpdateAsync(Project project, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _context.Projects.Update(project);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public Task DeleteAsync()

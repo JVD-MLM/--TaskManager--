@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TaskManager.Application.IRepositories;
-using TaskManager.Application.IServices.Authentication;
+using TaskManager.Application.IServices;
 using TaskManager.Infrastructure.Repositories;
 using TaskManager.Infrastructure.Services;
 

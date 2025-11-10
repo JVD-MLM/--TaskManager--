@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using TaskManager.Application.IServices.Authentication;
+using TaskManager.Application.IServices;
 
 namespace TaskManager.Infrastructure.Services;
 

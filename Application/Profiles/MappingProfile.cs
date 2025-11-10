@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using TaskManager.Application.DTOs.Project;
 using TaskManager.Application.Requests.Commands.Authentication;
 using TaskManager.Application.Requests.Commands.Project;
 using TaskManager.Domain.Entities.Identity;
@@ -20,5 +21,7 @@ public class MappingProfile : Profile
         CreateMap<Project, CreateProjectRequest>().ReverseMap()
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+
+        CreateMap<Project, ProjectDto>().ReverseMap();
     }
 }
