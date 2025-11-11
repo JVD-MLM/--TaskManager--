@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskManager.Application.IRepositories;
-using TaskManager.Domain.Entities.Project;
 using TaskManager.Domain.Entities.Todo;
 
 namespace TaskManager.Infrastructure.Repositories;
 
+/// <summary>
+///     ریپازیتوری تسک
+/// </summary>
 public class TodoRepository : BaseRepository, ITodoRepository
 {
     public TodoRepository(TaskManagerDbContext context) : base(context)

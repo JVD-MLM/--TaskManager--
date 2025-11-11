@@ -4,6 +4,9 @@ using TaskManager.Application.Requests.Commands.Todo;
 
 namespace TaskManager.Application.Validators.Todo;
 
+/// <summary>
+///     وليديتور ساخت تسک
+/// </summary>
 public class CreateTodoRequestValidator : AbstractValidator<CreateTodoRequest>
 {
     public CreateTodoRequestValidator(IProjectRepository projectRepository)
