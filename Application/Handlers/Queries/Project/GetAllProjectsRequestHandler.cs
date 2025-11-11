@@ -8,6 +8,9 @@ using TaskManager.Application.Responses.Project;
 
 namespace TaskManager.Application.Handlers.Queries.Project;
 
+/// <summary>
+///     هندلر دريافت همه پروژه ها
+/// </summary>
 public class
     GetAllProjectsRequestHandler : IRequestHandler<GetAllProjectsRequest, ApiResponse<GetAllProjectsRequestResponse>>
 {

@@ -52,6 +52,15 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("get-all-todos")]
+    [Description("دريافت همه تسک ها")]
+    public async Task<IActionResult> GetAllTodos(CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllTodosRequest());
+
+        return Ok(response);
+    }
+
     [Authorize]
     [HttpPost("edit-todo")]
     [Description("ويرايش تسک")]

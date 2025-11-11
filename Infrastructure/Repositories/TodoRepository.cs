@@ -33,7 +33,8 @@ public class TodoRepository : BaseRepository, ITodoRepository
 
     public Task<List<Todo>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var result = _context.Todos.ToListAsync();
+        return result;
     }
 
     public Task<List<Todo>> GetAllByFilterAsync(string? title, int? isComplete, int page, int pageSize,
