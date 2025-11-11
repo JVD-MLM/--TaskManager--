@@ -52,7 +52,7 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPost("edit-todo")]
     [Description("ويرايش تسک")]
     public async Task<IActionResult> EditTodo([FromBody] UpdateTodoRequest request,
@@ -67,6 +67,20 @@ public class TodoController : ControllerBase
             DeadLine = request.DeadLine,
             NeedApprove = request.NeedApprove,
             IsApproved = request.IsApproved
+        });
+
+        return Ok(response);
+    }
+
+    [Authorize]
+    [HttpPost("delete-todo")]
+    [Description("حذف تسک")]
+    public async Task<IActionResult> DeleteTodo([FromBody] DeleteTodoRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new DeleteTodoRequest
+        {
+            Id = request.Id
         });
 
         return Ok(response);

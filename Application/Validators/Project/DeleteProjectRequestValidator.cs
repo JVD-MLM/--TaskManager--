@@ -4,6 +4,9 @@ using TaskManager.Application.Requests.Commands.Project;
 
 namespace TaskManager.Application.Validators.Project;
 
+/// <summary>
+///     وليديتور حذف پروژه
+/// </summary>
 public class DeleteProjectRequestValidator:AbstractValidator<DeleteProjectRequest>
 {
     public DeleteProjectRequestValidator(IProjectRepository projectRepository)

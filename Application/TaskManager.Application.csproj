@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Requests\Commands\Todo\" />
     <Folder Include="Responses\Todo\" />
   </ItemGroup>
 

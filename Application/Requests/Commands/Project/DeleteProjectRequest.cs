@@ -6,7 +6,7 @@ namespace TaskManager.Application.Requests.Commands.Project;
 
 /// <summary>
 ///     درخواست حذف پروژه
-/// </summary
+/// </summary>
 public class DeleteProjectRequest : IRequest<ApiResponse<DeleteProjectRequestResponse>>
 {
     /// <summary>

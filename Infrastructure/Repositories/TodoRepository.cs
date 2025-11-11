@@ -48,8 +48,10 @@ public class TodoRepository : BaseRepository, ITodoRepository
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var todo = await GetAsync(id, cancellationToken);
+        todo.SetDelete();
+        await UpdateAsync(todo, cancellationToken);
     }
 }
