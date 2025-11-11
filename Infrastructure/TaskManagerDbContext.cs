@@ -5,7 +5,7 @@ using TaskManager.Domain.BaseEntities;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Domain.Entities.Jwt;
 using TaskManager.Domain.Entities.Project;
-using Task = TaskManager.Domain.Entities.Task.Task;
+using TaskManager.Domain.Entities.Todo;
 
 namespace TaskManager.Infrastructure;
 
@@ -39,7 +39,7 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
     public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<RevokedToken> RevokedTokens { get; set; }
     public DbSet<Project> Projects { get; set; }
-    public DbSet<Task> Tasks { get; set; }
+    public DbSet<Todo> Todos { get; set; }
 
     #endregion
 

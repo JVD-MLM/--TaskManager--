@@ -12,7 +12,7 @@ using TaskManager.Infrastructure;
 namespace TaskManager.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20251109205957_01")]
+    [Migration("20251111174802_01")]
     partial class _01
     {
         /// <inheritdoc />
@@ -318,13 +318,13 @@ namespace TaskManager.Infrastructure.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("TaskManager.Domain.Entities.Task.Task", b =>
+            modelBuilder.Entity("TaskManager.Domain.Entities.Todo.Todo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ApprovedBy")
+                    b.Property<Guid?>("ApprovedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -376,7 +376,7 @@ namespace TaskManager.Infrastructure.Migrations
 
                     b.HasIndex("ProjectRef");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Todos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -430,10 +430,10 @@ namespace TaskManager.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TaskManager.Domain.Entities.Task.Task", b =>
+            modelBuilder.Entity("TaskManager.Domain.Entities.Todo.Todo", b =>
                 {
                     b.HasOne("TaskManager.Domain.Entities.Project.Project", "Project")
-                        .WithMany("Tasks")
+                        .WithMany("Todos")
                         .HasForeignKey("ProjectRef")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -443,7 +443,7 @@ namespace TaskManager.Infrastructure.Migrations
 
             modelBuilder.Entity("TaskManager.Domain.Entities.Project.Project", b =>
                 {
-                    b.Navigation("Tasks");
+                    b.Navigation("Todos");
                 });
 #pragma warning restore 612, 618
         }

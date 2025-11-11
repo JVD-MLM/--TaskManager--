@@ -1,11 +1,11 @@
 ﻿using TaskManager.Domain.BaseEntities;
 
-namespace TaskManager.Domain.Entities.Task;
+namespace TaskManager.Domain.Entities.Todo;
 
 /// <summary>
 ///     تسک
 /// </summary>
-public class Task : BaseEntity<Guid>
+public class Todo : BaseEntity<Guid>
 {
     /// <summary>
     ///     عنوان
@@ -40,7 +40,7 @@ public class Task : BaseEntity<Guid>
     /// <summary>
     ///     تایید شده توسط
     /// </summary>
-    public Guid ApprovedBy { get; set; }
+    public Guid? ApprovedBy { get; set; }
 
     /// <summary>
     ///     آی دی پروژه

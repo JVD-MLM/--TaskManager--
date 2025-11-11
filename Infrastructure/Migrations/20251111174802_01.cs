@@ -202,7 +202,7 @@ namespace TaskManager.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "Todos",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -212,7 +212,7 @@ namespace TaskManager.Infrastructure.Migrations
                     DeadLine = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false),
                     NeedApprove = table.Column<bool>(type: "bit", nullable: false),
-                    ApprovedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ApprovedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ProjectRef = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -224,9 +224,9 @@ namespace TaskManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                    table.PrimaryKey("PK_Todos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tasks_Projects_ProjectRef",
+                        name: "FK_Todos_Projects_ProjectRef",
                         column: x => x.ProjectRef,
                         principalTable: "Projects",
                         principalColumn: "Id");
@@ -272,8 +272,8 @@ namespace TaskManager.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_ProjectRef",
-                table: "Tasks",
+                name: "IX_Todos_ProjectRef",
+                table: "Todos",
                 column: "ProjectRef");
         }
 
@@ -299,7 +299,7 @@ namespace TaskManager.Infrastructure.Migrations
                 name: "RevokedTokens");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "Todos");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

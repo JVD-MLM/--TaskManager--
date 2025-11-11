@@ -28,7 +28,7 @@ public class Project : BaseEntity<Guid>
     /// <summary>
     ///     تسک ها
     /// </summary>
-    public List<Task.Task> Tasks { get; set; }
+    public List<Todo.Todo> Todos { get; set; }
 
     #endregion
 
