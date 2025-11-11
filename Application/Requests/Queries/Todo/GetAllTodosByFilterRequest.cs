@@ -1,13 +1,10 @@
 ﻿using MediatR;
 using TaskManager.Application.Responses.BaseResponses;
-using TaskManager.Application.Responses.Project;
+using TaskManager.Application.Responses.Todo;
 
-namespace TaskManager.Application.Requests.Queries.Project;
+namespace TaskManager.Application.Requests.Queries.Todo;
 
-/// <summary>
-///     درخواست دريافت همه پروژه ها با فيلتر
-/// </summary>
-public class GetAllProjectsByFilterRequest : IRequest<ApiResponse<GetAllProjectsByFilterRequestResponse>>
+public class GetAllTodosByFilterRequest : IRequest<ApiResponse<GetAllTodosByFilterRequestResponse>>
 {
     /// <summary>
     ///     عنوان

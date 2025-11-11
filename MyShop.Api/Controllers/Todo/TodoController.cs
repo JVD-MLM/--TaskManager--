@@ -61,6 +61,22 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("get-all-todos-by-filter")]
+    [Description("دريافت همه تسک ها با فيلتر")]
+    public async Task<IActionResult> GetAllTodosByFilter([FromQuery] GetAllTodosByFilterRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllTodosByFilterRequest
+        {
+            Title = request.Title,
+            IsComplete = request.IsComplete,
+            Page = request.Page,
+            PageSize = request.PageSize
+        });
+
+        return Ok(response);
+    }
+
     [Authorize]
     [HttpPost("edit-todo")]
     [Description("ويرايش تسک")]

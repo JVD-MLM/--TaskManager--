@@ -37,10 +37,21 @@ public class TodoRepository : BaseRepository, ITodoRepository
         return result;
     }
 
-    public Task<List<Todo>> GetAllByFilterAsync(string? title, int? isComplete, int page, int pageSize,
+    public async Task<List<Todo>> GetAllByFilterAsync(string? title, int? isComplete, int page, int pageSize,
         CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var query = _context.Todos.AsQueryable();
+
+        if (!string.IsNullOrEmpty(title))
+            query = query.Where(x => x.Title.Contains(title)); // فيلتر عنوان
+
+        if (isComplete == 0)
+            query = query.Where(x => x.IsComplete == false);
+        else if (isComplete == 1) query = query.Where(x => x.IsComplete == true); // فيلتر كامل شده / نشده
+
+        var result = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+
+        return result;
     }
 
     public async Task UpdateAsync(Todo todo, CancellationToken cancellationToken)
