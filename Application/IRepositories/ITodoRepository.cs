@@ -1,0 +1,65 @@
+﻿using TaskManager.Domain.Entities.Todo;
+
+namespace TaskManager.Application.IRepositories;
+
+/// <summary>
+///     اینترفیس تسک
+/// </summary>
+public interface ITodoRepository
+{
+    /// <summary>
+    ///     وجود داشتن / نداشتن
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<bool> IsExist(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     ایجاد تسک
+    /// </summary>
+    /// <param name="todo"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task AddAsync(Todo todo, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     دريافت تسک
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Todo> GetAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     دريافت همه تسک ها
+    /// </summary>
+    /// <returns></returns>
+    Task<List<Todo>> GetAllAsync();
+
+    /// <summary>
+    ///     دريافت همه تسک ها با فيلتر
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="isComplete"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<Todo>> GetAllByFilterAsync(string? title, int? isComplete, int page, int pageSize,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     ويرايش تسک
+    /// </summary>
+    /// <param name="todo"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task UpdateAsync(Todo todo, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     حذف تسک
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+}

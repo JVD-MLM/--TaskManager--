@@ -16,5 +16,6 @@ public static class InfrastructureServicesRegistration
         services.AddScoped<IJwtRepository, JwtRepository>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ITodoRepository, TodoRepository>();
     }
 }
