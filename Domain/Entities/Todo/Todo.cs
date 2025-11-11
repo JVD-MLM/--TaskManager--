@@ -56,4 +56,19 @@ public class Todo : BaseEntity<Guid>
     public Project.Project Project { get; set; }
 
     #endregion
+
+    #region Methods
+
+    public void Update(string title, string? description, bool isComplete, DateTime? deadLine, bool isApproved,
+        bool needApprove)
+    {
+        Title = title;
+        Description = description;
+        IsComplete = isComplete;
+        DeadLine = deadLine;
+        IsApproved = isApproved;
+        NeedApprove = needApprove;
+    }
+
+    #endregion
 }

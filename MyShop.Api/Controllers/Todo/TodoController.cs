@@ -51,4 +51,24 @@ public class TodoController : ControllerBase
 
         return Ok(response);
     }
+
+    //[Authorize]
+    [HttpPost("edit-todo")]
+    [Description("ويرايش تسک")]
+    public async Task<IActionResult> EditTodo([FromBody] UpdateTodoRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new UpdateTodoRequest
+        {
+            Id = request.Id,
+            Title = request.Title,
+            Description = request.Description,
+            IsComplete = request.IsComplete,
+            DeadLine = request.DeadLine,
+            NeedApprove = request.NeedApprove,
+            IsApproved = request.IsApproved
+        });
+
+        return Ok(response);
+    }
 }

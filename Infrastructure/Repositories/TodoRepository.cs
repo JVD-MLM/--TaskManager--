@@ -42,9 +42,10 @@ public class TodoRepository : BaseRepository, ITodoRepository
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(Todo todo, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Todo todo, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _context.Todos.Update(todo);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public Task DeleteAsync(Guid id, CancellationToken cancellationToken)
