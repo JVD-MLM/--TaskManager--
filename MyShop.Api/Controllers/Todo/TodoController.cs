@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.Requests.Commands.Todo;
+using TaskManager.Application.Requests.Queries.Todo;
 
 namespace TaskManager.Api.Controllers.Todo;
 
@@ -33,6 +34,19 @@ public class TodoController : ControllerBase
             DeadLine = request.DeadLine,
             NeedApprove = request.NeedApprove,
             ProjectRef = request.ProjectRef
+        });
+
+        return Ok(response);
+    }
+
+    [HttpGet("get-todo")]
+    [Description("دريافت تسک")]
+    public async Task<IActionResult> GetTodo([FromQuery] GetTodoRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetTodoRequest
+        {
+            Id = request.Id
         });
 
         return Ok(response);

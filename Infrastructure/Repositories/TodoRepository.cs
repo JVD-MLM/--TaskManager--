@@ -25,9 +25,10 @@ public class TodoRepository : BaseRepository, ITodoRepository
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public Task<Todo> GetAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<Todo> GetAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Todos.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return result;
     }
 
     public Task<List<Todo>> GetAllAsync()
