@@ -18,8 +18,6 @@ public interface ITodoRepository
     /// <summary>
     ///     ایجاد تسک
     /// </summary>
-    /// <param name="todo"></param>
-    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task AddAsync(Todo todo, CancellationToken cancellationToken);
 
@@ -50,8 +48,6 @@ public interface ITodoRepository
     /// <summary>
     ///     ويرايش تسک
     /// </summary>
-    /// <param name="todo"></param>
-    /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task UpdateAsync(Todo todo, CancellationToken cancellationToken);
 

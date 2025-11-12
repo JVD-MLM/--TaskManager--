@@ -40,7 +40,7 @@ public class Todo : BaseEntity<Guid>
     /// <summary>
     ///     تایید شده توسط
     /// </summary>
-    public Guid? ApprovedBy { get; set; }
+    public Guid? ApprovedBy { get; set; } // todo
 
     /// <summary>
     ///     آی دی پروژه

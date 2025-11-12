@@ -39,7 +39,7 @@ public abstract class BaseEntity<T>
     /// <summary>
     ///     حذف شده توسط
     /// </summary>
-    public Guid? DeletedBy { get; set; }
+    public Guid? DeletedBy { get; set; } // todo
 
     /// <summary>
     ///     تاریخ حذف
