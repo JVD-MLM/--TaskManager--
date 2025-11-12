@@ -21,6 +21,12 @@ public class ProjectController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// ایجاد پروژه
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [Authorize]
     [HttpPost("create-project")]
     [Description("ایجاد پروژه")]
@@ -36,6 +42,12 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// دریافت پروژه
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpGet("get-project")]
     [Description("دريافت پروژه")]
     public async Task<IActionResult> GetProject([FromQuery] GetProjectRequest request,
@@ -49,6 +61,11 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// دريافت همه پروژه ها
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpGet("get-all-projects")]
     [Description("دريافت همه پروژه ها")]
     public async Task<IActionResult> GetAllProjects(CancellationToken cancellationToken)
@@ -58,6 +75,12 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// دريافت همه پروژه ها با فيلتر
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpGet("get-all-projects-by-filter")]
     [Description("دريافت همه پروژه ها با فيلتر")]
     public async Task<IActionResult> GetAllProjectsByFilter([FromQuery] GetAllProjectsByFilterRequest request,
@@ -74,6 +97,12 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// ويرايش پروژه
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [Authorize]
     [HttpPost("edit-project")]
     [Description("ويرايش پروژه")]
@@ -91,6 +120,12 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// حذف پروژه
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [Authorize]
     [HttpPost("delete-project")]
     [Description("حذف پروژه")]

@@ -4,6 +4,9 @@ using TaskManager.Application.Responses.Todo;
 
 namespace TaskManager.Application.Requests.Queries.Todo;
 
+/// <summary>
+///      درخواست دريافت همه تسک ها با فیلتر
+/// </summary>
 public class GetAllTodosByFilterRequest : IRequest<ApiResponse<GetAllTodosByFilterRequestResponse>>
 {
     /// <summary>

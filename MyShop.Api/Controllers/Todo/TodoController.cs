@@ -21,6 +21,12 @@ public class TodoController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// ایجاد تسک
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [Authorize]
     [HttpPost("create-todo")]
     [Description("ایجاد تسک")]
@@ -39,6 +45,12 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// دريافت تسک
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpGet("get-todo")]
     [Description("دريافت تسک")]
     public async Task<IActionResult> GetTodo([FromQuery] GetTodoRequest request,
@@ -52,6 +64,11 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// دريافت همه تسک ها
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpGet("get-all-todos")]
     [Description("دريافت همه تسک ها")]
     public async Task<IActionResult> GetAllTodos(CancellationToken cancellationToken)
@@ -61,6 +78,12 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// دريافت همه تسک ها با فيلتر
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpGet("get-all-todos-by-filter")]
     [Description("دريافت همه تسک ها با فيلتر")]
     public async Task<IActionResult> GetAllTodosByFilter([FromQuery] GetAllTodosByFilterRequest request,
@@ -77,6 +100,12 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// ويرايش تسک
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [Authorize]
     [HttpPost("edit-todo")]
     [Description("ويرايش تسک")]
@@ -97,6 +126,12 @@ public class TodoController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// حذف تسک
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [Authorize]
     [HttpPost("delete-todo")]
     [Description("حذف تسک")]

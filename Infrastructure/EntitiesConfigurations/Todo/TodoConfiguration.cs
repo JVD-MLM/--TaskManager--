@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TaskManager.Infrastructure.EntitiesConfigurations.Todo;
 
+/// <summary>
+/// کانفیگ انتیتی تسک
+/// </summary>
 public class TodoConfiguration : IEntityTypeConfiguration<Domain.Entities.Todo.Todo>
 {
     public void Configure(EntityTypeBuilder<Domain.Entities.Todo.Todo> builder)

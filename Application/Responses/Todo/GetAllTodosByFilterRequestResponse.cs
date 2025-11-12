@@ -7,5 +7,8 @@ namespace TaskManager.Application.Responses.Todo;
 /// </summary>
 public class GetAllTodosByFilterRequestResponse
 {
+    /// <summary>
+    /// لیست Dto تسک ها
+    /// </summary>
     public List<TodoDto> Items { get; set; }
 }

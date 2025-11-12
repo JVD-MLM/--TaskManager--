@@ -4,6 +4,9 @@ using TaskManager.Domain.Entities.Identity;
 
 namespace TaskManager.Infrastructure.EntitiesConfigurations.Identity;
 
+/// <summary>
+/// کانفیگ انتیتی ApplicationUser
+/// </summary>
 public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)

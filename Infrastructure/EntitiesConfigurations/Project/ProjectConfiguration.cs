@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TaskManager.Infrastructure.EntitiesConfigurations.Project;
 
+/// <summary>
+/// کانفیگ انتیتی Project
+/// </summary>
 public class ProjectConfiguration : IEntityTypeConfiguration<Domain.Entities.Project.Project>
 {
     public void Configure(EntityTypeBuilder<Domain.Entities.Project.Project> builder)

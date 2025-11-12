@@ -4,7 +4,7 @@ using TaskManager.Application.Requests.Commands.Authentication;
 namespace TaskManager.Application.Validators.Authentication;
 
 /// <summary>
-///     اعتبار سنجی درخواست ثبت نام کاربر
+///     ولیدیتور درخواست ثبت نام کاربر
 /// </summary>
 public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
 {
