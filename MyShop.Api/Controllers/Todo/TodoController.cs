@@ -22,7 +22,7 @@ public class TodoController : ControllerBase
     }
 
     /// <summary>
-    /// ایجاد تسک
+    ///     ایجاد تسک
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -46,7 +46,7 @@ public class TodoController : ControllerBase
     }
 
     /// <summary>
-    /// دريافت تسک
+    ///     دريافت تسک
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -65,7 +65,7 @@ public class TodoController : ControllerBase
     }
 
     /// <summary>
-    /// دريافت همه تسک ها
+    ///     دريافت همه تسک ها
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -79,7 +79,7 @@ public class TodoController : ControllerBase
     }
 
     /// <summary>
-    /// دريافت همه تسک ها با فيلتر
+    ///     دريافت همه تسک ها با فيلتر
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -101,7 +101,26 @@ public class TodoController : ControllerBase
     }
 
     /// <summary>
-    /// ويرايش تسک
+    ///     دريافت همه تسك ها بر اساس پروژه
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("get-all-todos-by-project")]
+    [Description("دريافت همه تسک ها بر اساس پروژه")]
+    public async Task<IActionResult> GetAllTodosByProject([FromQuery] GetAllTodosByProjectRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllTodosByProjectRequest
+        {
+            ProjectId = request.ProjectId
+        });
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    ///     ويرايش تسک
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -127,7 +146,7 @@ public class TodoController : ControllerBase
     }
 
     /// <summary>
-    /// حذف تسک
+    ///     حذف تسک
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>

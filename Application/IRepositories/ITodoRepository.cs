@@ -46,6 +46,14 @@ public interface ITodoRepository
         CancellationToken cancellationToken);
 
     /// <summary>
+    ///     دريافت همه تسك ها بر اساس پروژه
+    /// </summary>
+    /// <param name="projectId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<Todo>> GetTodosByProject(Guid projectId, CancellationToken cancellationToken);
+
+    /// <summary>
     ///     ويرايش تسک
     /// </summary>
     /// <returns></returns>

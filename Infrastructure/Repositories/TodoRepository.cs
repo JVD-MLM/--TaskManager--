@@ -54,6 +54,12 @@ public class TodoRepository : BaseRepository, ITodoRepository
         return result;
     }
 
+    public async Task<List<Todo>> GetTodosByProject(Guid projectId, CancellationToken cancellationToken)
+    {
+        var result = await _context.Todos.Where(x => x.ProjectRef == projectId).ToListAsync(cancellationToken);
+        return result;
+    }
+
     public async Task UpdateAsync(Todo todo, CancellationToken cancellationToken)
     {
         _context.Todos.Update(todo);
