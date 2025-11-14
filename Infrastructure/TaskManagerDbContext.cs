@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Application.IServices;
 using TaskManager.Domain.BaseEntities;
@@ -31,8 +32,44 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
     {
         builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
+        foreach (var entityType in builder.Model.GetEntityTypes()) // IsDelete Query Filter
+            if (IsSubclassOfRawGeneric(typeof(BaseEntity<>), entityType.ClrType))
+            {
+                var method = typeof(TaskManagerDbContext)
+                    .GetMethod(nameof(SetGlobalQueryFilter), BindingFlags.NonPublic | BindingFlags.Instance)!
+                    .MakeGenericMethod(entityType.ClrType);
+
+                method.Invoke(this, new object[] { builder });
+            }
+
         base.OnModelCreating(builder);
     }
+
+    #region IsDelete Query Filter Methods
+
+    private void SetGlobalQueryFilter<TEntity>(ModelBuilder builder) where TEntity : class
+    {
+        builder.Entity<TEntity>().HasQueryFilter(e =>
+            !EF.Property<bool>(e, "IsDeleted"));
+    }
+
+    private static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+    {
+        var current = toCheck;
+
+        while (current != null && current != typeof(object))
+        {
+            var cur = current.IsGenericType ? current.GetGenericTypeDefinition() : current;
+            if (cur == generic)
+                return true;
+
+            current = current.BaseType;
+        }
+
+        return false;
+    }
+
+    #endregion
 
     #region Tables
 
@@ -43,7 +80,7 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
 
     #endregion
 
-    #region CreatedAt&By & ModifiedAt&By Set
+    #region CreatedAt&By & ModifiedAt&By & DeletedAt&By Set
 
     public override int SaveChanges()
     {
