@@ -68,44 +68,44 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
                 e.Entity.GetType().BaseType.GetGenericTypeDefinition() == typeof(BaseEntity<>))
             .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-        foreach (var entry in baseEntityEntries) // پر كردن مقادير براي بيس انتيتي
+        foreach (var entry in baseEntityEntries)
         {
             var entity = entry.Entity;
-            var createdAtProp = entity.GetType().GetProperty("CreatedAt");
-            var modifiedAtProp = entity.GetType().GetProperty("ModifiedAt");
-            var createdByProp = entity.GetType().GetProperty("CreatedBy");
-            var modifiedByProp = entity.GetType().GetProperty("ModifiedBy");
+            var type = entity.GetType();
+
+            var createdAtProp = type.GetProperty("CreatedAt");
+            var modifiedAtProp = type.GetProperty("ModifiedAt");
+            var createdByProp = type.GetProperty("CreatedBy");
+            var modifiedByProp = type.GetProperty("ModifiedBy");
+
+            var isDeletedProp = type.GetProperty("IsDeleted");
+            var deletedAtProp = type.GetProperty("DeletedAt");
+            var deletedByProp = type.GetProperty("DeletedBy");
+
+            var isDeleted = (bool)(isDeletedProp?.GetValue(entity) ?? false);
+            var wasDeletedBefore = entry.OriginalValues.GetValue<bool>("IsDeleted");
+
+            if (!wasDeletedBefore && isDeleted)
+            {
+                deletedAtProp?.SetValue(entity, now);
+                if (userId.HasValue)
+                    deletedByProp?.SetValue(entity, userId);
+
+                continue;
+            }
 
             if (entry.State == EntityState.Added)
             {
                 createdAtProp?.SetValue(entity, now);
                 if (userId.HasValue)
-                    createdByProp?.SetValue(entity, userId.Value);
+                    createdByProp?.SetValue(entity, userId);
             }
 
             if (entry.State == EntityState.Modified)
             {
                 modifiedAtProp?.SetValue(entity, now);
                 if (userId.HasValue)
-                    modifiedByProp?.SetValue(entity, userId.Value);
-            }
-        }
-
-        var userEntries = ChangeTracker.Entries<ApplicationUser>()
-            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
-
-        foreach (var entry in userEntries) // پر كردن مقادير براي انتيتي يوزر
-        {
-            var user = entry.Entity;
-
-            if (entry.State == EntityState.Added)
-            {
-                user.CreatedAt = now;
-                user.ModifiedAt = null;
-            }
-            else if (entry.State == EntityState.Modified)
-            {
-                user.ModifiedAt = now;
+                    modifiedByProp?.SetValue(entity, userId);
             }
         }
     }
