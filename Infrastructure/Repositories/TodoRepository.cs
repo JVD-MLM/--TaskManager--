@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskManager.Application.IRepositories;
+using TaskManager.Application.IServices;
 using TaskManager.Domain.Entities.Todo;
 
 namespace TaskManager.Infrastructure.Repositories;
@@ -9,7 +10,7 @@ namespace TaskManager.Infrastructure.Repositories;
 /// </summary>
 public class TodoRepository : BaseRepository, ITodoRepository
 {
-    public TodoRepository(TaskManagerDbContext context) : base(context)
+    public TodoRepository(TaskManagerDbContext context, IAuthService authService) : base(context, authService)
     {
     }
 
@@ -70,6 +71,14 @@ public class TodoRepository : BaseRepository, ITodoRepository
     {
         var todo = await GetAsync(id, cancellationToken);
         todo.SetDelete();
+        await UpdateAsync(todo, cancellationToken);
+    }
+
+    public async Task ApproveAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var todo = await GetAsync(id, cancellationToken);
+        todo.SetApprove();
+        todo.ApprovedBy = _authService.GetCurrentUserId();
         await UpdateAsync(todo, cancellationToken);
     }
 }

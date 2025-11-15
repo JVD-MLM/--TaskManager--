@@ -66,4 +66,12 @@ public interface ITodoRepository
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     تاييد تسک
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task ApproveAsync(Guid id, CancellationToken cancellationToken);
 }

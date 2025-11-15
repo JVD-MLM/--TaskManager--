@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskManager.Application.IRepositories;
+using TaskManager.Application.IServices;
 using TaskManager.Domain.Entities.Project;
 
 namespace TaskManager.Infrastructure.Repositories;
@@ -9,7 +10,7 @@ namespace TaskManager.Infrastructure.Repositories;
 /// </summary>
 public class ProjectRepository : BaseRepository, IProjectRepository
 {
-    public ProjectRepository(TaskManagerDbContext context) : base(context)
+    public ProjectRepository(TaskManagerDbContext context, IAuthService authService) : base(context, authService)
     {
     }
 

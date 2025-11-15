@@ -164,4 +164,24 @@ public class TodoController : ControllerBase
 
         return Ok(response);
     }
+
+    /// <summary>
+    ///     تاييد تسک
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [Authorize]
+    [HttpPost("approve-todo")]
+    [Description("تاييد تسک")]
+    public async Task<IActionResult> ApproveTodo([FromBody] ApproveTodoRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new ApproveTodoRequest
+        {
+            Id = request.Id
+        });
+
+        return Ok(response);
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using TaskManager.Application.IRepositories;
+using TaskManager.Application.IServices;
 using TaskManager.Domain.Entities.Jwt;
 
 namespace TaskManager.Infrastructure.Repositories;
@@ -8,7 +9,7 @@ namespace TaskManager.Infrastructure.Repositories;
 /// </summary>
 public class JwtRepository : BaseRepository, IJwtRepository
 {
-    public JwtRepository(TaskManagerDbContext context) : base(context)
+    public JwtRepository(TaskManagerDbContext context, IAuthService authService) : base(context, authService)
     {
     }
 

@@ -40,7 +40,7 @@ public class Todo : BaseEntity<Guid>
     /// <summary>
     ///     تایید شده توسط
     /// </summary>
-    public Guid? ApprovedBy { get; set; } // todo
+    public Guid? ApprovedBy { get; set; }
 
     /// <summary>
     ///     آی دی پروژه
@@ -68,6 +68,11 @@ public class Todo : BaseEntity<Guid>
         DeadLine = deadLine;
         IsApproved = isApproved;
         NeedApprove = needApprove;
+    }
+
+    public void SetApprove()
+    {
+        IsApproved = true;
     }
 
     #endregion
