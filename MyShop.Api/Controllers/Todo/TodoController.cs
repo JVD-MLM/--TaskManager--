@@ -170,7 +170,7 @@ public class TodoController : ControllerBase
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
     [HttpPost("approve-todo")]
     [Description("تاييد تسک")]
     public async Task<IActionResult> ApproveTodo([FromBody] ApproveTodoRequest request,

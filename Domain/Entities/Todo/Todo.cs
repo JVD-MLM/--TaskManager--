@@ -59,6 +59,14 @@ public class Todo : BaseEntity<Guid>
 
     #region Methods
 
+    /// <summary>
+    ///     متد ویرایش
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="description"></param>
+    /// <param name="isComplete"></param>
+    /// <param name="deadLine"></param>
+    /// <param name="needApprove"></param>
     public void Update(string title, string? description, bool isComplete, DateTime? deadLine, bool needApprove)
     {
         Title = title;
@@ -68,11 +76,17 @@ public class Todo : BaseEntity<Guid>
         NeedApprove = needApprove;
     }
 
+    /// <summary>
+    ///     متد مقدار دهی IsApproved
+    /// </summary>
     public void SetIsApprove()
     {
         IsApproved = !NeedApprove;
     }
 
+    /// <summary>
+    ///     متد تایید
+    /// </summary>
     public void SetApprove()
     {
         IsApproved = true;
