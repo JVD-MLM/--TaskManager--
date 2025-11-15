@@ -1,3 +1,6 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
+using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -9,8 +12,6 @@ using TaskManager.Application.Profiles;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Identity;
 using TaskManager.Infrastructure;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,11 +45,15 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "JWT"
                 }
             },
-            new string[] {}
+            new string[] { }
         }
     });
-});
 
+    // توضيحات api در swagger
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+});
 
 #endregion
 
