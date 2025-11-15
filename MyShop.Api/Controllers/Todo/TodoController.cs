@@ -138,8 +138,7 @@ public class TodoController : ControllerBase
             Description = request.Description,
             IsComplete = request.IsComplete,
             DeadLine = request.DeadLine,
-            NeedApprove = request.NeedApprove,
-            IsApproved = request.IsApproved
+            NeedApprove = request.NeedApprove
         });
 
         return Ok(response);

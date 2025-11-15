@@ -30,7 +30,7 @@ public class Todo : BaseEntity<Guid>
     /// <summary>
     ///     تایید شده / نشده
     /// </summary>
-    public bool IsApproved { get; set; }
+    public bool IsApproved { get; private set; }
 
     /// <summary>
     ///     نیاز به تایید
@@ -59,15 +59,18 @@ public class Todo : BaseEntity<Guid>
 
     #region Methods
 
-    public void Update(string title, string? description, bool isComplete, DateTime? deadLine, bool isApproved,
-        bool needApprove)
+    public void Update(string title, string? description, bool isComplete, DateTime? deadLine, bool needApprove)
     {
         Title = title;
         Description = description;
         IsComplete = isComplete;
         DeadLine = deadLine;
-        IsApproved = isApproved;
         NeedApprove = needApprove;
+    }
+
+    public void SetIsApprove()
+    {
+        IsApproved = !NeedApprove;
     }
 
     public void SetApprove()

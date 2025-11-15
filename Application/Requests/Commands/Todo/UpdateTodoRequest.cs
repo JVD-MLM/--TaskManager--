@@ -35,11 +35,6 @@ public class UpdateTodoRequest : IRequest<ApiResponse<UpdateTodoRequestResponse>
     public DateTime? DeadLine { get; set; }
 
     /// <summary>
-    ///     تایید شده / نشده
-    /// </summary>
-    public bool IsApproved { get; set; }
-
-    /// <summary>
     ///     نیاز به تایید
     /// </summary>
     public bool NeedApprove { get; set; }

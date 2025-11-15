@@ -42,6 +42,8 @@ public class CreateTodoRequestHandler : IRequestHandler<CreateTodoRequest, ApiRe
 
         var newTodo = _mapper.Map<Domain.Entities.Todo.Todo>(request);
 
+        newTodo.SetIsApprove();
+
         await _todoRepository.AddAsync(newTodo, cancellationToken);
 
         return new ApiResponse<CreateTodoRequestResponse>
