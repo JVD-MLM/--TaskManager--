@@ -34,6 +34,7 @@ public class AuthenticationController : ControllerBase
             Email = request.Email,
             UserName = request.UserName,
             Password = request.Password,
+            RePassword = request.RePassword,
             FirstName = request.FirstName,
             LastName = request.LastName,
             Gender = request.Gender

@@ -21,6 +21,11 @@ public class SignUpRequest : IRequest<ApiResponse<SignUpRequestResponse>>
     public string Password { get; set; }
 
     /// <summary>
+    ///     تکرار رمز عبور
+    /// </summary>
+    public string RePassword { get; set; }
+
+    /// <summary>
     ///     ایمیل
     /// </summary>
     public string Email { get; set; }
