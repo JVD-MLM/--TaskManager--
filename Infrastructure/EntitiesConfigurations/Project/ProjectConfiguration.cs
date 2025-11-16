@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace TaskManager.Infrastructure.EntitiesConfigurations.Project;
 
 /// <summary>
-/// کانفیگ انتیتی Project
+///     کانفیگ انتیتی Project
 /// </summary>
 public class ProjectConfiguration : IEntityTypeConfiguration<Domain.Entities.Project.Project>
 {
@@ -13,5 +13,6 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Domain.Entities.Pro
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Title).HasMaxLength(256);
         builder.Property(x => x.Description).HasMaxLength(512);
+        builder.HasMany(x => x.Users).WithMany(x => x.Projects);
     }
 }

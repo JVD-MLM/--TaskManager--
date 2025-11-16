@@ -53,6 +53,8 @@ public class ApplicationUser : IdentityUser<Guid>
     /// </summary>
     public UserGender Gender { get; set; }
 
+    #region Methods
+
     /// <summary>
     ///     متد حذف
     /// </summary>
@@ -60,6 +62,22 @@ public class ApplicationUser : IdentityUser<Guid>
     {
         IsDeleted = true;
     }
+
+    #endregion
+
+    #region Relations
+
+    /// <summary>
+    ///     تسک ها
+    /// </summary>
+    public List<Todo.Todo> Todos { get; set; }
+
+    /// <summary>
+    ///     پروژه ها
+    /// </summary>
+    public List<Project.Project> Projects { get; set; }
+
+    #endregion
 }
 
 public enum UserGender
@@ -72,5 +90,5 @@ public enum UserGender
     /// <summary>
     ///     زن
     /// </summary>
-    [Description("زن")] Female = 2,
+    [Description("زن")] Female = 2
 }

@@ -1,4 +1,5 @@
 ﻿using TaskManager.Domain.BaseEntities;
+using TaskManager.Domain.Entities.Identity;
 
 namespace TaskManager.Domain.Entities.Todo;
 
@@ -47,6 +48,11 @@ public class Todo : BaseEntity<Guid>
     /// </summary>
     public Guid ProjectRef { get; set; }
 
+    /// <summary>
+    ///     آی دی کاربر
+    /// </summary>
+    public Guid UserRef { get; set; }
+
 
     #region Relations
 
@@ -54,6 +60,11 @@ public class Todo : BaseEntity<Guid>
     ///     پروژه
     /// </summary>
     public Project.Project Project { get; set; }
+
+    /// <summary>
+    ///     کاربر
+    /// </summary>
+    public ApplicationUser User { get; set; }
 
     #endregion
 

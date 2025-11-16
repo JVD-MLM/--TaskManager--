@@ -1,4 +1,5 @@
 ﻿using TaskManager.Domain.BaseEntities;
+using TaskManager.Domain.Entities.Identity;
 
 namespace TaskManager.Domain.Entities.Project;
 
@@ -22,16 +23,6 @@ public class Project : BaseEntity<Guid>
     /// </summary>
     public bool IsComplete { get; set; }
 
-
-    #region Relations
-
-    /// <summary>
-    ///     تسک ها
-    /// </summary>
-    public List<Todo.Todo> Todos { get; set; }
-
-    #endregion
-
     #region Methods
 
     /// <summary>
@@ -46,6 +37,21 @@ public class Project : BaseEntity<Guid>
         Description = description;
         IsComplete = isComplete;
     }
+
+    #endregion
+
+
+    #region Relations
+
+    /// <summary>
+    ///     تسک ها
+    /// </summary>
+    public List<Todo.Todo> Todos { get; set; }
+
+    /// <summary>
+    ///     کاربر ها
+    /// </summary>
+    public List<ApplicationUser> Users { get; set; }
 
     #endregion
 }

@@ -12,7 +12,7 @@ using TaskManager.Infrastructure;
 namespace TaskManager.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20251111174802_01")]
+    [Migration("20251116193416_01")]
     partial class _01
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace TaskManager.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ApplicationUserProject", b =>
+                {
+                    b.Property<Guid>("ProjectsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UsersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProjectsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("ApplicationUserProject");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
@@ -372,11 +387,31 @@ namespace TaskManager.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<Guid>("UserRef")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectRef");
 
+                    b.HasIndex("UserRef");
+
                     b.ToTable("Todos");
+                });
+
+            modelBuilder.Entity("ApplicationUserProject", b =>
+                {
+                    b.HasOne("TaskManager.Domain.Entities.Project.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TaskManager.Domain.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -438,7 +473,20 @@ namespace TaskManager.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("TaskManager.Domain.Entities.Identity.ApplicationUser", "User")
+                        .WithMany("Todos")
+                        .HasForeignKey("UserRef")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("Project");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaskManager.Domain.Entities.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("Todos");
                 });
 
             modelBuilder.Entity("TaskManager.Domain.Entities.Project.Project", b =>
