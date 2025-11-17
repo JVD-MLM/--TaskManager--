@@ -29,11 +29,6 @@ public class ApplicationUser : IdentityUser<Guid>
     public string? LastName { get; set; }
 
     /// <summary>
-    ///     حذف شده / نشده
-    /// </summary>
-    public bool IsDeleted { get; protected set; }
-
-    /// <summary>
     ///     تاریخ ایجاد
     /// </summary>
     public DateTime CreatedAt { get; set; }
