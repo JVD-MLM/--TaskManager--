@@ -73,10 +73,10 @@ public class ApplicationUser : IdentityUser<Guid>
     /// <summary>
     ///     متد حذف
     /// </summary>
-    //public void SetDelete()
-    //{
-    //    IsDeleted = true;
-    //}
+    public void BlockUser()
+    {
+        IsBlocked = true;
+    }
 
     #endregion
 
