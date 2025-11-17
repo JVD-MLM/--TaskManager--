@@ -9,6 +9,11 @@ namespace TaskManager.Domain.Entities.Identity;
 public class ApplicationUser : IdentityUser<Guid>
 {
     /// <summary>
+    ///     کد ملی
+    /// </summary>
+    public string NationalCode { get; set; }
+
+    /// <summary>
     ///     ادمین
     /// </summary>
     public bool IsAdmin { get; set; }

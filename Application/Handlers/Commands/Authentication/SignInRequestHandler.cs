@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using TaskManager.Application.Requests.Commands.Authentication;
@@ -29,7 +30,8 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
     public async Task<ApiResponse<SignInRequestResponse>> Handle(SignInRequest request,
         CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByEmailAsync(request.Email);
+        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.NationalCode == request.NationalCode,
+            cancellationToken);
 
         if (user != null && await _userManager.CheckPasswordAsync(user, request.Password))
         {
@@ -38,7 +40,7 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
             var authClaims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(ClaimTypes.Name, user.UserName),
+                new(ClaimTypes.Name, user.NationalCode),
                 new(ClaimTypes.Role, userRoles.FirstOrDefault()),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
@@ -59,7 +61,7 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
                 Status = new StatusResponse(false),
                 Data = new SignInRequestResponse
                 {
-                    Username = user.UserName,
+                    NationalCode = user.NationalCode,
                     FirstName = user.FirstName ?? "",
                     LastName = user.LastName ?? "",
                     RoleName = userRoles.FirstOrDefault() ?? "",

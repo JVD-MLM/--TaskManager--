@@ -11,13 +11,12 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
 {
     public SignUpRequestValidator(IUserRepository userRepository)
     {
-        RuleFor(x => x.UserName)
-            .NotEmpty().WithMessage("نام کاربری الزامی است")
-            .MinimumLength(3).WithMessage("نام کاربری باید حداقل 3 کاراکتر باشد");
-
-        RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("ایمیل الزامی است")
-            .EmailAddress().WithMessage("ایمیل وارد شده معتبر نیست");
+        RuleFor(x => x.NationalCode)
+            .NotEmpty().WithMessage("کد ملی نمی‌تواند خالی باشد.")
+            .Matches(@"^\d{10}$").WithMessage("کد ملی باید ۱۰ رقم باشد.")
+            .MustAsync(async (nationalCode, cancellationToken) =>
+                !await userRepository.IsExist(nationalCode, cancellationToken))
+            .WithMessage("این کد ملی قبلاً ثبت شده است.");
 
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("رمز عبور الزامی است")

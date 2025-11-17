@@ -18,4 +18,10 @@ public class UserRepository : BaseRepository, IUserRepository
         var result = await _context.Users.AnyAsync(x => x.Id == id, cancellationToken);
         return result;
     }
+
+    public async Task<bool> IsExist(string nationalCode, CancellationToken cancellationToken)
+    {
+        var result = await _context.Users.AnyAsync(x => x.NationalCode == nationalCode, cancellationToken);
+        return result;
+    }
 }

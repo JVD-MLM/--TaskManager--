@@ -20,8 +20,7 @@ public class MappingProfile : Profile
         #region ApplicationUser
 
         CreateMap<ApplicationUser, SignUpRequest>().ReverseMap()
-            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
-            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.NationalCode, opt => opt.MapFrom(src => src.NationalCode))
             .ForMember(dest => dest.ParentRef, opt => opt.MapFrom(src => src.ParentRef));
 
         #endregion

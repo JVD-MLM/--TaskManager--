@@ -11,9 +11,9 @@ namespace TaskManager.Application.Requests.Commands.Authentication;
 public class SignUpRequest : IRequest<ApiResponse<SignUpRequestResponse>>
 {
     /// <summary>
-    ///     نام کاربری
+    ///     کد ملی
     /// </summary>
-    public string UserName { get; set; }
+    public string NationalCode { get; set; }
 
     /// <summary>
     ///     رمز عبور
@@ -24,11 +24,6 @@ public class SignUpRequest : IRequest<ApiResponse<SignUpRequestResponse>>
     ///     تکرار رمز عبور
     /// </summary>
     public string RePassword { get; set; }
-
-    /// <summary>
-    ///     ایمیل
-    /// </summary>
-    public string Email { get; set; }
 
     /// <summary>
     ///     نام

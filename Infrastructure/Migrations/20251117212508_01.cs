@@ -30,6 +30,7 @@ namespace TaskManager.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NationalCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -306,6 +307,12 @@ namespace TaskManager.Infrastructure.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_NationalCode",
+                table: "AspNetUsers",
+                column: "NationalCode",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_ParentRef",

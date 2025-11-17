@@ -31,8 +31,7 @@ public class AuthenticationController : ControllerBase
     {
         var response = await _mediator.Send(new SignUpRequest
         {
-            Email = request.Email,
-            UserName = request.UserName,
+            NationalCode = request.NationalCode,
             Password = request.Password,
             RePassword = request.RePassword,
             FirstName = request.FirstName,
@@ -56,7 +55,7 @@ public class AuthenticationController : ControllerBase
     {
         var response = await _mediator.Send(new SignInRequest
         {
-            Email = request.Email,
+            NationalCode = request.NationalCode,
             Password = request.Password
         });
 

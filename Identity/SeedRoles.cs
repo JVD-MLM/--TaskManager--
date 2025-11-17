@@ -21,7 +21,8 @@ public static class SeedRoles
 
         var adminUser = new ApplicationUser
         {
-            UserName = "test-manager@rayan.com",
+            NationalCode = "1234567890",
+            UserName = "1234567890",
             Email = "test-manager@rayan.com",
             FirstName = "Admin",
             LastName = "Admin",

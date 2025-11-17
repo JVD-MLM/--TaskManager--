@@ -11,9 +11,9 @@ public class SignInRequestResponse
     public string Token { get; set; }
 
     /// <summary>
-    ///     نام کاربری
+    ///     کد ملی
     /// </summary>
-    public string Username { get; set; }
+    public string NationalCode { get; set; }
 
     /// <summary>
     ///     نام

@@ -10,9 +10,9 @@ namespace TaskManager.Application.Requests.Commands.Authentication;
 public class SignInRequest : IRequest<ApiResponse<SignInRequestResponse>>
 {
     /// <summary>
-    ///     ایمیل
+    ///     کد ملی
     /// </summary>
-    public string Email { get; set; }
+    public string NationalCode { get; set; }
 
     /// <summary>
     ///     رمز عبور

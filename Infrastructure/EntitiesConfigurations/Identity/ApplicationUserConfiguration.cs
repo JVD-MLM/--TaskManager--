@@ -5,12 +5,14 @@ using TaskManager.Domain.Entities.Identity;
 namespace TaskManager.Infrastructure.EntitiesConfigurations.Identity;
 
 /// <summary>
-/// کانفیگ انتیتی ApplicationUser
+///     کانفیگ انتیتی ApplicationUser
 /// </summary>
 public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
+        builder.Property(x => x.NationalCode).HasMaxLength(16);
+        builder.HasIndex(x => x.NationalCode).IsUnique();
         builder.Property(x => x.FirstName).HasMaxLength(256);
         builder.Property(x => x.LastName).HasMaxLength(256);
         builder.HasOne(x => x.Parent).WithMany(x => x.Childs).HasForeignKey(x => x.ParentRef)

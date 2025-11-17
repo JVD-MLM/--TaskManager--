@@ -43,6 +43,8 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
 
         var user = _mapper.Map<ApplicationUser>(request);
 
+        user.UserName = request.NationalCode; // برای اینکه UserName خالی نباشد
+
         var createUser = await _userManager.CreateAsync(user, request.Password);
 
         if (createUser.Succeeded)
