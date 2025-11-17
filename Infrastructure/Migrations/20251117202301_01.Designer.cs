@@ -12,7 +12,7 @@ using TaskManager.Infrastructure;
 namespace TaskManager.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20251116193416_01")]
+    [Migration("20251117202301_01")]
     partial class _01
     {
         /// <inheritdoc />
@@ -187,6 +187,9 @@ namespace TaskManager.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -226,6 +229,9 @@ namespace TaskManager.Infrastructure.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -233,6 +239,9 @@ namespace TaskManager.Infrastructure.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<Guid?>("ParentRef")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -262,6 +271,8 @@ namespace TaskManager.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("ParentRef");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -465,6 +476,16 @@ namespace TaskManager.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TaskManager.Domain.Entities.Identity.ApplicationUser", b =>
+                {
+                    b.HasOne("TaskManager.Domain.Entities.Identity.ApplicationUser", "Parent")
+                        .WithMany("Childs")
+                        .HasForeignKey("ParentRef")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("TaskManager.Domain.Entities.Todo.Todo", b =>
                 {
                     b.HasOne("TaskManager.Domain.Entities.Project.Project", "Project")
@@ -486,6 +507,8 @@ namespace TaskManager.Infrastructure.Migrations
 
             modelBuilder.Entity("TaskManager.Domain.Entities.Identity.ApplicationUser", b =>
                 {
+                    b.Navigation("Childs");
+
                     b.Navigation("Todos");
                 });
 

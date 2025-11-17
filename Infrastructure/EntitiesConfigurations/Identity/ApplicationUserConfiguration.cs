@@ -13,5 +13,7 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
     {
         builder.Property(x => x.FirstName).HasMaxLength(256);
         builder.Property(x => x.LastName).HasMaxLength(256);
+        builder.HasOne(x => x.Parent).WithMany(x => x.Childs).HasForeignKey(x => x.ParentRef)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

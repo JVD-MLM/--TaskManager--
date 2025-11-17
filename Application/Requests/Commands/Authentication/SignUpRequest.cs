@@ -44,4 +44,9 @@ public class SignUpRequest : IRequest<ApiResponse<SignUpRequestResponse>>
     ///     جنسیت
     /// </summary>
     public UserGender Gender { get; set; }
+
+    /// <summary>
+    ///     آی دی والد
+    /// </summary>
+    public Guid? ParentRef { get; set; }
 }

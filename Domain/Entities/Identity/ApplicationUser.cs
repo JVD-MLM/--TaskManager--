@@ -34,9 +34,19 @@ public class ApplicationUser : IdentityUser<Guid>
     public DateTime CreatedAt { get; set; }
 
     /// <summary>
+    ///     تاریخ ایجاد
+    /// </summary>
+    public Guid? CreatedBy { get; set; }
+
+    /// <summary>
     ///     تاریخ ویرایش
     /// </summary>
     public DateTime? ModifiedAt { get; set; }
+
+    /// <summary>
+    ///     تاریخ ویرایش
+    /// </summary>
+    public Guid? ModifiedBy { get; set; }
 
     /// <summary>
     ///     بلاک شده / نشده
@@ -52,6 +62,11 @@ public class ApplicationUser : IdentityUser<Guid>
     ///     جنسیت
     /// </summary>
     public UserGender Gender { get; set; }
+
+    /// <summary>
+    ///     آی دی والد
+    /// </summary>
+    public Guid? ParentRef { get; set; }
 
     #region Methods
 
@@ -76,6 +91,16 @@ public class ApplicationUser : IdentityUser<Guid>
     ///     پروژه ها
     /// </summary>
     public List<Project.Project> Projects { get; set; }
+
+    /// <summary>
+    ///     والد
+    /// </summary>
+    public ApplicationUser? Parent { get; set; }
+
+    /// <summary>
+    ///     فرزندان
+    /// </summary>
+    public List<ApplicationUser>? Childs { get; set; }
 
     #endregion
 }

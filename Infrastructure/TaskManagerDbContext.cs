@@ -99,6 +99,7 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
         var now = DateTime.UtcNow;
         var userId = _authService.GetCurrentUserId();
 
+        // پر کردن در انتیتی هایی که از base entity ارث بی میکنند
         var baseEntityEntries = ChangeTracker.Entries()
             .Where(e =>
                 e.Entity.GetType().BaseType?.IsGenericType == true &&
@@ -143,6 +144,30 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
                 modifiedAtProp?.SetValue(entity, now);
                 if (userId.HasValue)
                     modifiedByProp?.SetValue(entity, userId);
+            }
+        }
+
+        // پر کردن در انتیتی User
+        var userEntries = ChangeTracker.Entries<ApplicationUser>()
+            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+
+        foreach (var entry in userEntries)
+        {
+            var user = entry.Entity;
+
+            if (entry.State == EntityState.Added)
+            {
+                user.CreatedAt = now;
+
+                if (userId.HasValue)
+                    user.CreatedBy = userId;
+            }
+            else if (entry.State == EntityState.Modified)
+            {
+                user.ModifiedAt = now;
+
+                if (userId.HasValue)
+                    user.ModifiedBy = userId;
             }
         }
     }

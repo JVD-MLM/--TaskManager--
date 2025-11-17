@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using TaskManager.Application.IRepositories;
 using TaskManager.Application.Requests.Commands.Authentication;
 
 namespace TaskManager.Application.Validators.Authentication;
@@ -8,7 +9,7 @@ namespace TaskManager.Application.Validators.Authentication;
 /// </summary>
 public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
 {
-    public SignUpRequestValidator()
+    public SignUpRequestValidator(IUserRepository userRepository)
     {
         RuleFor(x => x.UserName)
             .NotEmpty().WithMessage("نام کاربری الزامی است")
@@ -25,5 +26,15 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
         RuleFor(x => x.RePassword)
             .NotEmpty().WithMessage("تکرار رمز عبور الزامی است")
             .Equal(x => x.Password).WithMessage("رمز عبور و تکرار آن مطابقت ندارند");
+
+        RuleFor(x => x.ParentRef)
+            .MustAsync(async (id, cancellationToken) =>
+            {
+                if (id == null)
+                    return true; // چون والد اختیاری است
+
+                return await userRepository.IsExist(id.Value, cancellationToken);
+            })
+            .WithMessage("کاربر والد یافت نشد");
     }
 }
