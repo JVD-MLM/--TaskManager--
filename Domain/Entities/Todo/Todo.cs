@@ -78,13 +78,18 @@ public class Todo : BaseEntity<Guid>
     /// <param name="isComplete"></param>
     /// <param name="deadLine"></param>
     /// <param name="needApprove"></param>
-    public void Update(string title, string? description, bool isComplete, DateTime? deadLine, bool needApprove)
+    /// <param name="projectRef"></param>
+    /// <param name="userRef"></param>
+    public void Update(string title, string? description, bool isComplete, DateTime? deadLine, bool needApprove,
+        Guid projectRef, Guid userRef)
     {
         Title = title;
         Description = description;
         IsComplete = isComplete;
         DeadLine = deadLine;
         NeedApprove = needApprove;
+        ProjectRef = projectRef;
+        UserRef = userRef;
     }
 
     /// <summary>

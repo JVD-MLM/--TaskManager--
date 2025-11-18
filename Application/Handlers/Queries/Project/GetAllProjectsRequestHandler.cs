@@ -26,7 +26,7 @@ public class
     public async Task<ApiResponse<GetAllProjectsRequestResponse>> Handle(GetAllProjectsRequest request,
         CancellationToken cancellationToken)
     {
-        var projects = await _projectRepository.GetAllAsync();
+        var projects = await _projectRepository.GetAllAsync(cancellationToken);
 
         var result = _mapper.Map<List<ProjectDto>>(projects);
 

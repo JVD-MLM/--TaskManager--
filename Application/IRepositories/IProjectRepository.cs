@@ -35,7 +35,7 @@ public interface IProjectRepository
     ///     دريافت همه پروژه ها
     /// </summary>
     /// <returns></returns>
-    Task<List<Project>> GetAllAsync();
+    Task<List<Project>> GetAllAsync(CancellationToken cancellationToken);
 
     /// <summary>
     ///     دريافت همه پروژه ها با فيلتر

@@ -32,9 +32,9 @@ public class ProjectRepository : BaseRepository, IProjectRepository
         return result;
     }
 
-    public Task<List<Project>> GetAllAsync()
+    public async Task<List<Project>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var result = _context.Projects.ToListAsync();
+        var result = await _context.Projects.ToListAsync(cancellationToken);
         return result;
     }
 

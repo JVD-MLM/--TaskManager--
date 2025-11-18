@@ -25,7 +25,7 @@ public class GetAllTodosRequestHandler : IRequestHandler<GetAllTodosRequest, Api
     public async Task<ApiResponse<GetAllTodosRequestResponse>> Handle(GetAllTodosRequest request,
         CancellationToken cancellationToken)
     {
-        var todos = await _todoRepository.GetAllAsync();
+        var todos = await _todoRepository.GetAllAsync(cancellationToken);
 
         var result = _mapper.Map<List<TodoDto>>(todos);
 

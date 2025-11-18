@@ -9,7 +9,7 @@ namespace TaskManager.Application.Validators.Todo;
 /// </summary>
 public class CreateTodoRequestValidator : AbstractValidator<CreateTodoRequest>
 {
-    public CreateTodoRequestValidator(IProjectRepository projectRepository)
+    public CreateTodoRequestValidator(IProjectRepository projectRepository, IUserRepository userRepository)
     {
         RuleFor(x => x.Title)
             .NotEmpty()
@@ -18,5 +18,9 @@ public class CreateTodoRequestValidator : AbstractValidator<CreateTodoRequest>
         RuleFor(x => x.ProjectRef)
             .MustAsync(async (id, cancellationToken) => await projectRepository.IsExist(id, cancellationToken))
             .WithMessage("پروژه مورد نظر یافت نشد");
+
+        RuleFor(x => x.UserRef)
+            .MustAsync(async (id, cancellationToken) => await userRepository.IsExist(id, cancellationToken))
+            .WithMessage("کاربر یافت نشد");
     }
 }

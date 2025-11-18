@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using TaskManager.Application.DTOs.Project;
 using TaskManager.Application.DTOs.Todo;
+using TaskManager.Application.DTOs.User;
 using TaskManager.Application.Requests.Commands.Authentication;
 using TaskManager.Application.Requests.Commands.Project;
 using TaskManager.Application.Requests.Commands.Todo;
@@ -45,6 +46,12 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.ProjectRef, opt => opt.MapFrom(src => src.ProjectRef));
 
         CreateMap<Todo, TodoDto>().ReverseMap();
+
+        #endregion
+
+        #region User
+
+        CreateMap<ApplicationUser, UserDto>().ReverseMap();
 
         #endregion
     }

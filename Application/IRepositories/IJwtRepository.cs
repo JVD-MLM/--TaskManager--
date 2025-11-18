@@ -11,6 +11,7 @@ public interface IJwtRepository
     ///     متد باطل كردن توكن
     /// </summary>
     /// <param name="token"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task RevokeToken(RevokedToken token);
+    Task RevokeToken(RevokedToken token, CancellationToken cancellationToken);
 }

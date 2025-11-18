@@ -33,4 +33,9 @@ public class CreateTodoRequest : IRequest<ApiResponse<CreateTodoRequestResponse>
     ///     آی دی پروژه
     /// </summary>
     public Guid ProjectRef { get; set; }
+
+    /// <summary>
+    ///     آی دی کاربر
+    /// </summary>
+    public Guid UserRef { get; set; }
 }

@@ -32,9 +32,9 @@ public class TodoRepository : BaseRepository, ITodoRepository
         return result;
     }
 
-    public Task<List<Todo>> GetAllAsync()
+    public async Task<List<Todo>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var result = _context.Todos.ToListAsync();
+        var result = await _context.Todos.ToListAsync(cancellationToken);
         return result;
     }
 

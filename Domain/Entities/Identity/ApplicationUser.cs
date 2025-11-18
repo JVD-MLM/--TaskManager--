@@ -70,6 +70,19 @@ public class ApplicationUser : IdentityUser<Guid>
 
     #region Methods
 
+    public void Update(string nationalCode, bool isAdmin, string? firstName, string? lastName, bool isBlocked,
+        bool isActive, Guid? parentRef, UserGender gender)
+    {
+        NationalCode = nationalCode;
+        FirstName = firstName;
+        LastName = lastName;
+        IsAdmin = isAdmin;
+        LastName = lastName;
+        IsActive = isActive;
+        ParentRef = parentRef;
+        Gender = gender;
+    }
+
     /// <summary>
     ///     متد حذف
     /// </summary>

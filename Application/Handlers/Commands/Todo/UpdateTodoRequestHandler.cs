@@ -38,7 +38,7 @@ public class UpdateTodoRequestHandler : IRequestHandler<UpdateTodoRequest, ApiRe
 
         var todo = await _todoRepository.GetAsync(request.Id, cancellationToken);
 
-        todo.Update(request.Title, request.Description, request.IsComplete, request.DeadLine, request.NeedApprove);
+        todo.Update(request.Title, request.Description, request.IsComplete, request.DeadLine, request.NeedApprove ,request.ProjectRef, request.UserRef);
 
         todo.SetIsApprove();
 

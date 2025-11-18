@@ -38,4 +38,14 @@ public class UpdateTodoRequest : IRequest<ApiResponse<UpdateTodoRequestResponse>
     ///     نیاز به تایید
     /// </summary>
     public bool NeedApprove { get; set; }
+
+    /// <summary>
+    ///     آی دی پروژه
+    /// </summary>
+    public Guid ProjectRef { get; set; }
+
+    /// <summary>
+    ///     آی دی کاربر
+    /// </summary>
+    public Guid UserRef { get; set; }
 }

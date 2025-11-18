@@ -39,7 +39,8 @@ public class TodoController : ControllerBase
             Description = request.Description,
             DeadLine = request.DeadLine,
             NeedApprove = request.NeedApprove,
-            ProjectRef = request.ProjectRef
+            ProjectRef = request.ProjectRef,
+            UserRef = request.UserRef
         });
 
         return Ok(response);
@@ -138,7 +139,9 @@ public class TodoController : ControllerBase
             Description = request.Description,
             IsComplete = request.IsComplete,
             DeadLine = request.DeadLine,
-            NeedApprove = request.NeedApprove
+            NeedApprove = request.NeedApprove,
+            ProjectRef = request.ProjectRef,
+            UserRef = request.UserRef
         });
 
         return Ok(response);

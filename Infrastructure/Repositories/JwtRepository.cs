@@ -13,9 +13,9 @@ public class JwtRepository : BaseRepository, IJwtRepository
     {
     }
 
-    public async Task RevokeToken(RevokedToken token)
+    public async Task RevokeToken(RevokedToken token, CancellationToken cancellationToken)
     {
-        await _context.RevokedTokens.AddAsync(token);
-        await _context.SaveChangesAsync();
+        await _context.RevokedTokens.AddAsync(token, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

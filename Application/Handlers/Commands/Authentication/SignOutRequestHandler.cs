@@ -57,7 +57,7 @@ public class SignOutRequestHandler : IRequestHandler<SignOutRequest, ApiResponse
             ExpireAt = expireAt
         };
 
-        await _jwtRepository.RevokeToken(revokedToken);
+        await _jwtRepository.RevokeToken(revokedToken, cancellationToken);
 
         await _signInManager.SignOutAsync();
 

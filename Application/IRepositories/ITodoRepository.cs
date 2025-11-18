@@ -33,7 +33,7 @@ public interface ITodoRepository
     ///     دريافت همه تسک ها
     /// </summary>
     /// <returns></returns>
-    Task<List<Todo>> GetAllAsync();
+    Task<List<Todo>> GetAllAsync(CancellationToken cancellationToken);
 
     /// <summary>
     ///     دريافت همه تسک ها با فيلتر
