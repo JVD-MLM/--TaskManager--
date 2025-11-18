@@ -48,4 +48,9 @@ public class UpdateTodoRequest : IRequest<ApiResponse<UpdateTodoRequestResponse>
     ///     آی دی کاربر
     /// </summary>
     public Guid UserRef { get; set; }
+
+    /// <summary>
+    ///     تایید شده / نشده
+    /// </summary>
+    public bool IsApproved { get; set; }
 }

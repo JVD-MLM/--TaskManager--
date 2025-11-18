@@ -31,7 +31,7 @@ public class Todo : BaseEntity<Guid>
     /// <summary>
     ///     تایید شده / نشده
     /// </summary>
-    public bool IsApproved { get; private set; }
+    public bool IsApproved { get; set; }
 
     /// <summary>
     ///     نیاز به تایید
@@ -80,8 +80,9 @@ public class Todo : BaseEntity<Guid>
     /// <param name="needApprove"></param>
     /// <param name="projectRef"></param>
     /// <param name="userRef"></param>
+    /// <param name="isApproved"></param>
     public void Update(string title, string? description, bool isComplete, DateTime? deadLine, bool needApprove,
-        Guid projectRef, Guid userRef)
+        Guid projectRef, Guid userRef, bool isApproved)
     {
         Title = title;
         Description = description;
@@ -90,6 +91,7 @@ public class Todo : BaseEntity<Guid>
         NeedApprove = needApprove;
         ProjectRef = projectRef;
         UserRef = userRef;
+        IsApproved = isApproved;
     }
 
     /// <summary>

@@ -37,7 +37,8 @@ public class AuthenticationController : ControllerBase
             FirstName = request.FirstName,
             LastName = request.LastName,
             Gender = request.Gender,
-            ParentRef = request.ParentRef
+            ParentRef = request.ParentRef,
+            Role = request.Role
         });
 
         return Ok(response);

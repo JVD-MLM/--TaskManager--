@@ -44,4 +44,9 @@ public class SignUpRequest : IRequest<ApiResponse<SignUpRequestResponse>>
     ///     آی دی والد
     /// </summary>
     public Guid? ParentRef { get; set; }
+
+    /// <summary>
+    ///     نقش
+    /// </summary>
+    public string Role { get; set; }
 }

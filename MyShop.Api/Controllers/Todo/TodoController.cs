@@ -141,7 +141,8 @@ public class TodoController : ControllerBase
             DeadLine = request.DeadLine,
             NeedApprove = request.NeedApprove,
             ProjectRef = request.ProjectRef,
-            UserRef = request.UserRef
+            UserRef = request.UserRef,
+            IsApproved = request.IsApproved
         });
 
         return Ok(response);

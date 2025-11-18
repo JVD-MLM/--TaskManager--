@@ -49,9 +49,7 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
 
         if (createUser.Succeeded)
         {
-            var roleExists = await _userManager.IsInRoleAsync(user, "Employee");
-
-            if (!roleExists) await _userManager.AddToRoleAsync(user, "Employee");
+            await _userManager.AddToRoleAsync(user, request.Role);
 
             return new ApiResponse<SignUpRequestResponse>
             {

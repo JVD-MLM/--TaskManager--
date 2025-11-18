@@ -9,6 +9,8 @@ namespace TaskManager.Application.Validators.Authentication;
 /// </summary>
 public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
 {
+    private readonly string[] validRoles = { "Admin", "Manager", "Employee" };
+
     public SignUpRequestValidator(IUserRepository userRepository)
     {
         RuleFor(x => x.NationalCode)
@@ -35,5 +37,9 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
                 return await userRepository.IsExist(id.Value, cancellationToken);
             })
             .WithMessage("کاربر والد یافت نشد");
+
+        RuleFor(x => x.Role)
+            .Must(role => validRoles.Contains(role, StringComparer.OrdinalIgnoreCase))
+            .WithMessage("نقش انتخاب ‌شده وجوئ ندارد");
     }
 }
