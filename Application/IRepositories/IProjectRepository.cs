@@ -62,4 +62,12 @@ public interface IProjectRepository
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     دریافت همه پروژه های کاربر
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<Project>> GetAllProjectsByUser(Guid id, CancellationToken cancellationToken);
 }

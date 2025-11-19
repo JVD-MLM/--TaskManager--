@@ -1,4 +1,6 @@
-﻿namespace TaskManager.Application.IServices;
+﻿using TaskManager.Domain.Entities.Identity;
+
+namespace TaskManager.Application.IServices;
 
 /// <summary>
 ///     اينترفيس احراز هويت
@@ -10,4 +12,17 @@ public interface IAuthService
     /// </summary>
     /// <returns></returns>
     public Guid? GetCurrentUserId();
+
+    /// <summary>
+    ///     متد گرفتن كاربر جاري
+    /// </summary>
+    /// <returns></returns>
+    public Task<ApplicationUser?> GetCurrentUser(CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     چک کردن نقش کاربر جاری
+    /// </summary>
+    /// <param name="role"></param>
+    /// <returns></returns>
+    public bool CurrentUserIsInRole(string role);
 }

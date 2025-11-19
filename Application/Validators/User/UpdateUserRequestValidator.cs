@@ -13,11 +13,11 @@ public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
             .WithMessage("رکورد مورد نظر یافت نشد");
 
         RuleFor(x => x.NationalCode)
-            .NotEmpty().WithMessage("کد ملی نمی‌تواند خالی باشد.")
-            .Matches(@"^\d{10}$").WithMessage("کد ملی باید ۱۰ رقم باشد.")
+            .NotEmpty().WithMessage("کد ملی الزامی است")
+            .Matches(@"^\d{10}$").WithMessage("کد ملی باید 10 رقم باشد")
             .MustAsync(async (nationalCode, cancellationToken) =>
                 !await userRepository.IsExist(nationalCode, cancellationToken))
-            .WithMessage("این کد ملی قبلاً ثبت شده است.");
+            .WithMessage("کد ملی تکراری است");
 
         RuleFor(x => x.ParentRef)
             .MustAsync(async (id, cancellationToken) =>

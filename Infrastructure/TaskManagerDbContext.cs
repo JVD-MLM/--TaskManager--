@@ -15,7 +15,7 @@ namespace TaskManager.Infrastructure;
 /// </summary>
 public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
 {
-    private readonly IAuthService _authService;
+    private readonly ICurrentUserService _currentUser; // استفاده بجای authService برای حل مشکل Circular Dependency
 
     public TaskManagerDbContext(DbContextOptions<TaskManagerDbContext> options) :
         base(options) // كانستراكتور براي فكتوري
@@ -23,9 +23,9 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
     }
 
     public TaskManagerDbContext(DbContextOptions<TaskManagerDbContext> options, // كانستراكتور عادي
-        IAuthService authenticationService) : base(options)
+        ICurrentUserService currentUser) : base(options)
     {
-        _authService = authenticationService;
+        _currentUser = currentUser;
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -97,7 +97,7 @@ public class TaskManagerDbContext : IdentityDbContext<ApplicationUser, Applicati
     private void UpdateTimestamps()
     {
         var now = DateTime.UtcNow;
-        var userId = _authService.GetCurrentUserId();
+        var userId = _currentUser?.UserId;
 
         // پر کردن در انتیتی هایی که از base entity ارث بی میکنند
         var baseEntityEntries = ChangeTracker.Entries()

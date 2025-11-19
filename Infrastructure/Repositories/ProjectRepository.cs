@@ -51,6 +51,13 @@ public class ProjectRepository : BaseRepository, IProjectRepository
         await UpdateAsync(project, cancellationToken);
     }
 
+    public async Task<List<Project>> GetAllProjectsByUser(Guid id, CancellationToken cancellationToken)
+    {
+        var result = await _context.Projects.Include(x => x.Users).Where(x => x.Users.Any(x => x.Id == id))
+            .ToListAsync(cancellationToken);
+        return result;
+    }
+
     public async Task<List<Project>> GetAllByFilterAsync(string? title, int? isComplete, int page, int pageSize,
         CancellationToken cancellationToken)
     {

@@ -22,12 +22,12 @@ public class ProjectController : ControllerBase
     }
 
     /// <summary>
-    /// ایجاد پروژه
+    ///     ایجاد پروژه
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
     [HttpPost("create-project")]
     [Description("ایجاد پروژه")]
     public async Task<IActionResult> CreateProject([FromBody] CreateProjectRequest request,
@@ -36,14 +36,15 @@ public class ProjectController : ControllerBase
         var response = await _mediator.Send(new CreateProjectRequest
         {
             Title = request.Title,
-            Description = request.Description
+            Description = request.Description,
+            UserRefs = request.UserRefs
         });
 
         return Ok(response);
     }
 
     /// <summary>
-    /// دریافت پروژه
+    ///     دریافت پروژه
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -62,7 +63,7 @@ public class ProjectController : ControllerBase
     }
 
     /// <summary>
-    /// دريافت همه پروژه ها
+    ///     دريافت همه پروژه ها
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -76,7 +77,7 @@ public class ProjectController : ControllerBase
     }
 
     /// <summary>
-    /// دريافت همه پروژه ها با فيلتر
+    ///     دريافت همه پروژه ها با فيلتر
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -98,7 +99,7 @@ public class ProjectController : ControllerBase
     }
 
     /// <summary>
-    /// ويرايش پروژه
+    ///     ويرايش پروژه
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -121,7 +122,7 @@ public class ProjectController : ControllerBase
     }
 
     /// <summary>
-    /// حذف پروژه
+    ///     حذف پروژه
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -133,6 +134,25 @@ public class ProjectController : ControllerBase
         CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new DeleteProjectRequest
+        {
+            Id = request.Id
+        });
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    ///     دريافت همه پروژه های کاربر
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("get-all-projects-by-user")]
+    [Description("دريافت همه پروژه های کاربر")]
+    public async Task<IActionResult> GetAllProjectsByUser([FromQuery] GetAllProjectsByUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllProjectsByUserRequest
         {
             Id = request.Id
         });

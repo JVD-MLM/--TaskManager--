@@ -18,4 +18,9 @@ public class CreateProjectRequest : IRequest<ApiResponse<CreateProjectRequestRes
     ///     توضیحات
     /// </summary>
     public string? Description { get; set; }
+
+    /// <summary>
+    ///     آی دی کاربر
+    /// </summary>
+    public List<Guid> UserRefs { get; set; } = new();
 }
