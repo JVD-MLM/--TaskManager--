@@ -41,6 +41,8 @@ public class AuthenticationController : ControllerBase
             Role = request.Role
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -60,6 +62,8 @@ public class AuthenticationController : ControllerBase
             Password = request.Password
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -77,6 +81,8 @@ public class AuthenticationController : ControllerBase
         {
             Token = request.Token
         });
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }

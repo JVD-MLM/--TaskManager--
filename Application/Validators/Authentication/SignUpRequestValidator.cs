@@ -40,6 +40,6 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
 
         RuleFor(x => x.Role)
             .Must(role => validRoles.Contains(role, StringComparer.OrdinalIgnoreCase))
-            .WithMessage("نقش انتخاب ‌شده وجوئ ندارد");
+            .WithMessage("نقش انتخاب شده یافت نشد");
     }
 }

@@ -40,6 +40,8 @@ public class ProjectController : ControllerBase
             UserRefs = request.UserRefs
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -59,6 +61,8 @@ public class ProjectController : ControllerBase
             Id = request.Id
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -72,6 +76,8 @@ public class ProjectController : ControllerBase
     public async Task<IActionResult> GetAllProjects(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetAllProjectsRequest());
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }
@@ -94,6 +100,8 @@ public class ProjectController : ControllerBase
             Page = request.Page,
             PageSize = request.PageSize
         });
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }
@@ -118,6 +126,8 @@ public class ProjectController : ControllerBase
             IsComplete = request.IsComplete
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -138,6 +148,8 @@ public class ProjectController : ControllerBase
             Id = request.Id
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -156,6 +168,8 @@ public class ProjectController : ControllerBase
         {
             Id = request.Id
         });
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }

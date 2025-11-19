@@ -43,6 +43,8 @@ public class TodoController : ControllerBase
             UserRef = request.UserRef
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -62,6 +64,8 @@ public class TodoController : ControllerBase
             Id = request.Id
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -75,6 +79,8 @@ public class TodoController : ControllerBase
     public async Task<IActionResult> GetAllTodos(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetAllTodosRequest());
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }
@@ -98,6 +104,8 @@ public class TodoController : ControllerBase
             PageSize = request.PageSize
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -116,6 +124,8 @@ public class TodoController : ControllerBase
         {
             ProjectId = request.ProjectId
         });
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }
@@ -145,6 +155,8 @@ public class TodoController : ControllerBase
             IsApproved = request.IsApproved
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -164,6 +176,8 @@ public class TodoController : ControllerBase
         {
             Id = request.Id
         });
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }
@@ -185,6 +199,8 @@ public class TodoController : ControllerBase
             Id = request.Id
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -203,6 +219,8 @@ public class TodoController : ControllerBase
         {
             Id = request.Id
         });
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }

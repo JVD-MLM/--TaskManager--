@@ -37,6 +37,8 @@ public class UserController : ControllerBase
             Id = request.Id
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -56,6 +58,8 @@ public class UserController : ControllerBase
             NationalCode = request.NationalCode
         });
 
+        if (response.Status.HasError) return BadRequest(response);
+
         return Ok(response);
     }
 
@@ -69,6 +73,8 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetAllTodos(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetAllUsersRequest());
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }
@@ -97,6 +103,8 @@ public class UserController : ControllerBase
             IsActive = request.IsActive,
             IsBlocked = request.IsBlocked
         });
+
+        if (response.Status.HasError) return BadRequest(response);
 
         return Ok(response);
     }
