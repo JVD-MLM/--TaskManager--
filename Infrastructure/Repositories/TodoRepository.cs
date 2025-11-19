@@ -81,4 +81,10 @@ public class TodoRepository : BaseRepository, ITodoRepository
         todo.ApprovedBy = _authService.GetCurrentUserId();
         await UpdateAsync(todo, cancellationToken);
     }
+
+    public async Task<List<Todo>> GetAllTodosByUser(Guid id, CancellationToken cancellationToken)
+    {
+        var result = await _context.Todos.Where(x => x.UserRef == id).ToListAsync(cancellationToken);
+        return result;
+    }
 }

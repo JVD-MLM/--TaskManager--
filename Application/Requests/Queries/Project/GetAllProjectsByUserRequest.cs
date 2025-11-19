@@ -9,5 +9,8 @@ namespace TaskManager.Application.Requests.Queries.Project;
 /// </summary>
 public class GetAllProjectsByUserRequest : IRequest<ApiResponse<GetAllProjectsByUserRequestResponse>>
 {
+    /// <summary>
+    ///     آی دی
+    /// </summary>
     public Guid Id { get; set; }
 }

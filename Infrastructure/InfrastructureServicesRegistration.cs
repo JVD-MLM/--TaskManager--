@@ -18,5 +18,6 @@ public static class InfrastructureServicesRegistration
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITodoRepository, TodoRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
     }
 }

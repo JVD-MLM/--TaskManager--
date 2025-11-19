@@ -74,4 +74,12 @@ public interface ITodoRepository
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task ApproveAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     دریافت همه تسک های کاربر
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<Todo>> GetAllTodosByUser(Guid id, CancellationToken cancellationToken);
 }

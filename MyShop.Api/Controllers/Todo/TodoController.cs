@@ -187,4 +187,23 @@ public class TodoController : ControllerBase
 
         return Ok(response);
     }
+
+    /// <summary>
+    ///     دريافت همه تسک های کاربر
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("get-all-todos-by-user")]
+    [Description("دريافت همه تسک های کاربر")]
+    public async Task<IActionResult> GetAllTodosByUser([FromQuery] GetAllTodosByUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllTodosByUserRequest
+        {
+            Id = request.Id
+        });
+
+        return Ok(response);
+    }
 }
