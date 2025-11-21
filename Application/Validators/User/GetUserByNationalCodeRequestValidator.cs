@@ -4,6 +4,9 @@ using TaskManager.Application.Requests.Queries.User;
 
 namespace TaskManager.Application.Validators.User;
 
+/// <summary>
+///     وليديتور دریافت کاربر با کد ملی
+/// </summary>
 public class GetUserByNationalCodeRequestValidator : AbstractValidator<GetUserByNationalCodeRequest>
 {
     public GetUserByNationalCodeRequestValidator(IUserRepository userRepository)

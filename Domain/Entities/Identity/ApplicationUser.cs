@@ -70,6 +70,9 @@ public class ApplicationUser : IdentityUser<Guid>
 
     #region Methods
 
+    /// <summary>
+    ///     متد آپدیت
+    /// </summary>
     public void Update(string nationalCode, bool isAdmin, string? firstName, string? lastName, bool isBlocked,
         bool isActive, Guid? parentRef, UserGender gender)
     {

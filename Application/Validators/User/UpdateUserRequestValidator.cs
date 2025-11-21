@@ -4,6 +4,9 @@ using TaskManager.Application.Requests.Commands.User;
 
 namespace TaskManager.Application.Validators.User;
 
+/// <summary>
+///     ولیدیتور ویرایش کاربر
+/// </summary>
 public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
 {
     public UpdateUserRequestValidator(IUserRepository userRepository)
