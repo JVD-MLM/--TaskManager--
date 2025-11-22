@@ -8,7 +8,7 @@ namespace TaskManager.Application.Responses.Todo;
 public class GetTodoRequestResponse
 {
     /// <summary>
-    /// Dto پروژه
+    ///     Dto پروژه
     /// </summary>
     public TodoDto Item { get; set; }
 }
