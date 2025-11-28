@@ -8,6 +8,11 @@ namespace TaskManager.Application.DTOs.User;
 public class UserDto
 {
     /// <summary>
+    ///     آی دی
+    /// </summary>
+    public string Id { get; set; }
+
+    /// <summary>
     ///     کد ملی
     /// </summary>
     public string NationalCode { get; set; }
