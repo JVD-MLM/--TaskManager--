@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using TaskManager.Domain.Enums;
 
 namespace TaskManager.Domain.Entities.Identity;
 
@@ -119,17 +119,4 @@ public class ApplicationUser : IdentityUser<Guid>
     public List<ApplicationUser>? Childs { get; set; }
 
     #endregion
-}
-
-public enum UserGender
-{
-    /// <summary>
-    ///     مرد
-    /// </summary>
-    [Description("مرد")] Male = 1,
-
-    /// <summary>
-    ///     زن
-    /// </summary>
-    [Description("زن")] Female = 2
 }

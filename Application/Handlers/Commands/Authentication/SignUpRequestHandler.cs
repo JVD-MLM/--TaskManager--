@@ -6,6 +6,7 @@ using TaskManager.Application.Requests.Commands.Authentication;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Domain.Entities.Identity;
+using TaskManager.Domain.Enums.Extensions;
 
 namespace TaskManager.Application.Handlers.Commands.Authentication;
 
@@ -49,7 +50,7 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
 
         if (createUser.Succeeded)
         {
-            await _userManager.AddToRoleAsync(user, request.Role);
+            await _userManager.AddToRoleAsync(user, request.Role.GetName());
 
             return new ApiResponse<SignUpRequestResponse>
             {

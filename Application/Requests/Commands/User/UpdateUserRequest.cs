@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Application.Responses.User;
-using TaskManager.Domain.Entities.Identity;
+using TaskManager.Domain.Enums;
 
 namespace TaskManager.Application.Requests.Commands.User;
 

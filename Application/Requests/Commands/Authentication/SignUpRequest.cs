@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using TaskManager.Application.Responses.Authentication;
 using TaskManager.Application.Responses.BaseResponses;
-using TaskManager.Domain.Entities.Identity;
+using TaskManager.Domain.Enums;
+using TaskManager.Identity;
 
 namespace TaskManager.Application.Requests.Commands.Authentication;
 
@@ -48,5 +49,5 @@ public class SignUpRequest : IRequest<ApiResponse<SignUpRequestResponse>>
     /// <summary>
     ///     نقش
     /// </summary>
-    public string Role { get; set; }
+    public UserRoles Role { get; set; }
 }

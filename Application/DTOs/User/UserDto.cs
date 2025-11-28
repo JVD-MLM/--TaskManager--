@@ -1,4 +1,4 @@
-﻿using TaskManager.Domain.Entities.Identity;
+﻿using TaskManager.Domain.Enums;
 
 namespace TaskManager.Application.DTOs.User;
 
