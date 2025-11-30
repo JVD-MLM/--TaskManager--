@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using TaskManager.Application.IRepositories;
 using TaskManager.Application.Requests.Commands.User;
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Application.Responses.User;
+using TaskManager.Domain.Entities.Identity;
 
 namespace TaskManager.Application.Handlers.Commands.User;
 
@@ -12,13 +14,16 @@ namespace TaskManager.Application.Handlers.Commands.User;
 /// </summary>
 public class UpdateUserRequestHandler : IRequestHandler<UpdateUserRequest, ApiResponse<UpdateUserRequestResponse>>
 {
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly IUserRepository _userRepository;
     private readonly IValidator<UpdateUserRequest> _validator;
 
-    public UpdateUserRequestHandler(IUserRepository userRepository, IValidator<UpdateUserRequest> validator)
+    public UpdateUserRequestHandler(IUserRepository userRepository, IValidator<UpdateUserRequest> validator,
+        UserManager<ApplicationUser> userManager)
     {
         _userRepository = userRepository;
         _validator = validator;
+        _userManager = userManager;
     }
 
     public async Task<ApiResponse<UpdateUserRequestResponse>> Handle(UpdateUserRequest request,
@@ -36,12 +41,34 @@ public class UpdateUserRequestHandler : IRequestHandler<UpdateUserRequest, ApiRe
                 Data = null
             };
 
-        var todo = await _userRepository.GetAsync(request.Id, cancellationToken);
+        var user = await _userRepository.GetAsync(request.Id, cancellationToken);
 
-        todo.Update(request.NationalCode, request.IsAdmin, request.FirstName, request.LastName, request.IsBlocked,
+        if (!string.IsNullOrEmpty(request.Password))
+        {
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await _userManager.ResetPasswordAsync(user, token, request.Password);
+
+            if (!result.Succeeded)
+                return new ApiResponse<UpdateUserRequestResponse>
+                {
+                    Status = new StatusResponse(true)
+                    {
+                        Errors = result.Errors.Select(e => e.Description).ToList() // ارور هاي identity
+                    },
+                    Data = null
+                };
+        }
+
+        user.Update(request.NationalCode, request.IsAdmin, request.FirstName, request.LastName, request.IsBlocked,
             request.IsActive, request.ParentRef, request.Gender);
 
-        await _userRepository.UpdateAsync(todo, cancellationToken);
+        if (!string.IsNullOrEmpty(request.NationalCode))
+        {
+            user.UserName = request.NationalCode;
+        }
+
+        await _userRepository.UpdateAsync(user, cancellationToken);
 
         return new ApiResponse<UpdateUserRequestResponse>
         {

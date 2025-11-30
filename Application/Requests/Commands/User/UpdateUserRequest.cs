@@ -54,4 +54,14 @@ public class UpdateUserRequest : IRequest<ApiResponse<UpdateUserRequestResponse>
     ///     آی دی والد
     /// </summary>
     public Guid? ParentRef { get; set; }
+
+    /// <summary>
+    ///     رمز عبور
+    /// </summary>
+    public string? Password { get; set; }
+
+    /// <summary>
+    ///     تکرار رمز عبور
+    /// </summary>
+    public string? RePassword { get; set; }
 }

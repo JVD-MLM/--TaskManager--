@@ -18,8 +18,15 @@ public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
         RuleFor(x => x.NationalCode)
             .NotEmpty().WithMessage("کد ملی الزامی است")
             .Matches(@"^\d{10}$").WithMessage("کد ملی باید 10 رقم باشد")
-            .MustAsync(async (nationalCode, cancellationToken) =>
-                !await userRepository.IsExist(nationalCode, cancellationToken))
+            .MustAsync(async (request, nationalCode, cancellationToken) =>
+            {
+                var existingUser = await userRepository.GetAsync(nationalCode, cancellationToken);
+
+                if (existingUser == null)
+                    return true; // کد ملی تکراری نیست
+
+                return existingUser.Id == request.Id; // اگر همان کاربر است، درست است، در غیر این صورت خطا
+            })
             .WithMessage("کد ملی تکراری است");
 
         RuleFor(x => x.ParentRef)
@@ -31,5 +38,13 @@ public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
                 return await userRepository.IsExist(id.Value, cancellationToken);
             })
             .WithMessage("کاربر والد یافت نشد");
+
+        RuleFor(x => x.Password)
+            .NotEmpty().WithMessage("رمز عبور الزامی است")
+            .MinimumLength(8).WithMessage("رمز عبور باید حداقل 8 کاراکتر باشد");
+
+        RuleFor(x => x.RePassword)
+            .NotEmpty().WithMessage("تکرار رمز عبور الزامی است")
+            .Equal(x => x.Password).WithMessage("رمز عبور و تکرار آن مطابقت ندارند");
     }
 }

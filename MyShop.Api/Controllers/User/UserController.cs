@@ -85,7 +85,7 @@ public class UserController : ControllerBase
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Authorize]
+    //[Authorize]
     [HttpPost("edit-user")]
     [Description("ويرايش کاربر")]
     public async Task<IActionResult> EditUser([FromBody] UpdateUserRequest request,
@@ -101,7 +101,9 @@ public class UserController : ControllerBase
             ParentRef = request.ParentRef,
             Gender = request.Gender,
             IsActive = request.IsActive,
-            IsBlocked = request.IsBlocked
+            IsBlocked = request.IsBlocked,
+            Password = request.Password,
+            RePassword = request.RePassword
         });
 
         if (response.Status.HasError) return BadRequest(response);
