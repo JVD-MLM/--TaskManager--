@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.Requests.Commands.Authentication;
 
@@ -25,6 +26,7 @@ public class AuthenticationController : ControllerBase
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
+    [Authorize(Roles = "Admin,Manager")]
     [HttpPost("sign-up")]
     [Description("ثبت نام")]
     public async Task<IActionResult> SignUp([FromBody] SignUpRequest request, CancellationToken cancellationToken)
