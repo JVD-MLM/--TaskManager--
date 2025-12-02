@@ -2,6 +2,7 @@
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Application.Responses.User;
 using TaskManager.Domain.Enums;
+using TaskManager.Identity;
 
 namespace TaskManager.Application.Requests.Commands.User;
 
@@ -64,4 +65,9 @@ public class UpdateUserRequest : IRequest<ApiResponse<UpdateUserRequestResponse>
     ///     تکرار رمز عبور
     /// </summary>
     public string? RePassword { get; set; }
+
+    /// <summary>
+    ///     نقش
+    /// </summary>
+    public UserRoles Role { get; set; }
 }

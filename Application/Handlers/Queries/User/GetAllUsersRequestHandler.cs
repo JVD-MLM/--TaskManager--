@@ -34,7 +34,7 @@ public class GetAllUsersRequestHandler : IRequestHandler<GetAllUsersRequest, Api
 
         var result = _mapper.Map<List<UserDto>>(users);
 
-        for (var i = 0; i < users.Count; i++)
+        for (var i = 0; i < users.Count; i++) // todo: performance
         {
             var roles = await _userManager.GetRolesAsync(users[i]);
             result[i].Role = roles.FirstOrDefault()!;

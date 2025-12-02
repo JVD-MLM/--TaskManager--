@@ -12,7 +12,7 @@ using TaskManager.Infrastructure;
 namespace TaskManager.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20251117225215_01")]
+    [Migration("20251202021229_01")]
     partial class _01
     {
         /// <inheritdoc />

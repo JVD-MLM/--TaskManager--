@@ -6,6 +6,7 @@ using TaskManager.Application.Requests.Commands.User;
 using TaskManager.Application.Responses.BaseResponses;
 using TaskManager.Application.Responses.User;
 using TaskManager.Domain.Entities.Identity;
+using TaskManager.Domain.Enums.Extensions;
 
 namespace TaskManager.Application.Handlers.Commands.User;
 
@@ -63,10 +64,14 @@ public class UpdateUserRequestHandler : IRequestHandler<UpdateUserRequest, ApiRe
         user.Update(request.NationalCode, request.IsAdmin, request.FirstName, request.LastName, request.IsBlocked,
             request.IsActive, request.ParentRef, request.Gender);
 
-        if (!string.IsNullOrEmpty(request.NationalCode))
-        {
-            user.UserName = request.NationalCode;
-        }
+        if (!string.IsNullOrEmpty(request.NationalCode)) user.UserName = request.NationalCode;
+
+        var currentRoles = await _userManager.GetRolesAsync(user);
+
+        if (currentRoles.Any())
+            await _userManager.RemoveFromRolesAsync(user, currentRoles);
+
+        await _userManager.AddToRoleAsync(user, request.Role.GetName());
 
         await _userRepository.UpdateAsync(user, cancellationToken);
 
