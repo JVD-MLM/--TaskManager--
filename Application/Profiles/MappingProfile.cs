@@ -47,7 +47,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.NeedApprove, opt => opt.MapFrom(src => src.NeedApprove))
             .ForMember(dest => dest.ProjectRef, opt => opt.MapFrom(src => src.ProjectRef));
 
-        CreateMap<Todo, TodoDto>().ReverseMap();
+        CreateMap<Todo, TodoDto>()
+            .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt.ToPersianDateTime()))
+            .ForMember(dest => dest.DeadLine, opt => opt.MapFrom(src => src.DeadLine.ToPersianDateTime()));
 
         #endregion
 

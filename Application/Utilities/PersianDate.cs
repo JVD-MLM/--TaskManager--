@@ -7,7 +7,7 @@ namespace TaskManager.Application.Utilities;
 /// </summary>
 public static class PersianDate
 {
-    public static string ToPersianDateTime(this DateTime date)
+    public static string ToPersianDateTime(this DateTime date) // برای DateTime
     {
         var pc = new PersianCalendar();
 
@@ -20,5 +20,10 @@ public static class PersianDate
         var second = pc.GetSecond(date);
 
         return $"{year:0000}/{month:00}/{day:00} {hour:00}:{minute:00}:{second:00}";
+    }
+
+    public static string ToPersianDateTime(this DateTime? date) // برای DateTime?
+    {
+        return date.HasValue ? date.Value.ToPersianDateTime() : null;
     }
 }

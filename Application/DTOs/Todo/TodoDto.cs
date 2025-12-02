@@ -1,12 +1,15 @@
-﻿using TaskManager.Application.DTOs.Project;
-
-namespace TaskManager.Application.DTOs.Todo;
+﻿namespace TaskManager.Application.DTOs.Todo;
 
 /// <summary>
 ///     Dto تسک
 /// </summary>
 public class TodoDto
 {
+    /// <summary>
+    ///     آی دی
+    /// </summary>
+    public Guid Id { get; set; }
+
     /// <summary>
     ///     عنوان
     /// </summary>
@@ -25,7 +28,7 @@ public class TodoDto
     /// <summary>
     ///     تاریخ ددلاین
     /// </summary>
-    public DateTime? DeadLine { get; set; }
+    public string? DeadLine { get; set; }
 
     /// <summary>
     ///     تایید شده / نشده
@@ -41,4 +44,24 @@ public class TodoDto
     ///     تایید شده توسط
     /// </summary>
     public Guid? ApprovedBy { get; set; }
+
+    /// <summary>
+    ///     ایجاد شده توسط
+    /// </summary>
+    public Guid CreatedBy { get; set; }
+
+    /// <summary>
+    ///     تاریخ ایجاد
+    /// </summary>
+    public string CreatedAt { get; set; }
+
+    /// <summary>
+    ///     آی دی پروژه
+    /// </summary>
+    public Guid ProjectRef { get; set; }
+
+    /// <summary>
+    ///     آی دی کاربر
+    /// </summary>
+    public Guid UserRef { get; set; }
 }
