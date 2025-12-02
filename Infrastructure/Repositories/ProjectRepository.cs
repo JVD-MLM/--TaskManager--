@@ -28,13 +28,14 @@ public class ProjectRepository : BaseRepository, IProjectRepository
 
     public async Task<Project> GetAsync(Guid id, CancellationToken cancellationToken)
     {
-        var result = await _context.Projects.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        var result = await _context.Projects.Include(x => x.Users).Include(x => x.Todos)
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         return result;
     }
 
     public async Task<List<Project>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var result = await _context.Projects.ToListAsync(cancellationToken);
+        var result = await _context.Projects.Include(x => x.Users).Include(x => x.Todos).ToListAsync(cancellationToken);
         return result;
     }
 
@@ -61,7 +62,7 @@ public class ProjectRepository : BaseRepository, IProjectRepository
     public async Task<List<Project>> GetAllByFilterAsync(string? title, int? isComplete, int page, int pageSize,
         CancellationToken cancellationToken)
     {
-        var query = _context.Projects.AsQueryable();
+        var query = _context.Projects.Include(x => x.Users).Include(x => x.Todos).AsQueryable();
 
         if (!string.IsNullOrEmpty(title))
             query = query.Where(x => x.Title.Contains(title)); // فيلتر عنوان

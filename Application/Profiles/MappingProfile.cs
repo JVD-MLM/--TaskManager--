@@ -5,6 +5,7 @@ using TaskManager.Application.DTOs.User;
 using TaskManager.Application.Requests.Commands.Authentication;
 using TaskManager.Application.Requests.Commands.Project;
 using TaskManager.Application.Requests.Commands.Todo;
+using TaskManager.Application.Utilities;
 using TaskManager.Domain.Entities.Identity;
 using TaskManager.Domain.Entities.Project;
 using TaskManager.Domain.Entities.Todo;
@@ -32,7 +33,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
-        CreateMap<Project, ProjectDto>().ReverseMap();
+        CreateMap<Project, ProjectDto>()
+            .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt.ToPersianDateTime()));
 
         #endregion
 
