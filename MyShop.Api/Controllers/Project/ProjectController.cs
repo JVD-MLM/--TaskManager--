@@ -112,7 +112,7 @@ public class ProjectController : ControllerBase
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    //[Authorize]
+    [Authorize(Roles = "Admin,Manager")]
     [HttpPost("edit-project")]
     [Description("ويرايش پروژه")]
     public async Task<IActionResult> EditProject([FromBody] UpdateProjectRequest request,
@@ -138,7 +138,7 @@ public class ProjectController : ControllerBase
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
     [HttpPost("delete-project")]
     [Description("حذف پروژه")]
     public async Task<IActionResult> DeleteProject([FromBody] DeleteProjectRequest request,
