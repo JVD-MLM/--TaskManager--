@@ -35,7 +35,7 @@ public class ProjectRepository : BaseRepository, IProjectRepository
 
     public async Task<List<Project>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var result = await _context.Projects.Include(x => x.Users).Include(x => x.Todos).ToListAsync(cancellationToken);
+        var result = await _context.Projects.ToListAsync(cancellationToken);
         return result;
     }
 
