@@ -73,7 +73,10 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
 
         return new ApiResponse<SignInRequestResponse>
         {
-            Status = new StatusResponse(true),
+            Status = new StatusResponse(true)
+            {
+                Errors = new List<string> { "کاربر یافت نشد" }
+            },
             Data = null
         };
     }

@@ -12,7 +12,7 @@ using TaskManager.Infrastructure;
 namespace TaskManager.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20251202021229_01")]
+    [Migration("20251202224432_01")]
     partial class _01
     {
         /// <inheritdoc />
@@ -324,8 +324,8 @@ namespace TaskManager.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<bool>("IsComplete")
                         .HasColumnType("bit");
@@ -374,8 +374,8 @@ namespace TaskManager.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
@@ -384,6 +384,9 @@ namespace TaskManager.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDone")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")

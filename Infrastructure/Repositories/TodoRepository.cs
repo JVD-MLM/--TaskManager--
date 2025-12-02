@@ -82,6 +82,13 @@ public class TodoRepository : BaseRepository, ITodoRepository
         await UpdateAsync(todo, cancellationToken);
     }
 
+    public async Task DoneAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var todo = await GetAsync(id, cancellationToken);
+        todo.SetDone();
+        await UpdateAsync(todo, cancellationToken);
+    }
+
     public async Task<List<Todo>> GetAllTodosByUser(Guid id, CancellationToken cancellationToken)
     {
         var result = await _context.Todos.Where(x => x.UserRef == id).ToListAsync(cancellationToken);

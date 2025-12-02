@@ -76,6 +76,14 @@ public interface ITodoRepository
     Task ApproveAsync(Guid id, CancellationToken cancellationToken);
 
     /// <summary>
+    ///     انجام تسک
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task DoneAsync(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>
     ///     دریافت همه تسک های کاربر
     /// </summary>
     /// <param name="id"></param>

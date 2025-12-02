@@ -205,6 +205,28 @@ public class TodoController : ControllerBase
     }
 
     /// <summary>
+    ///     انجام تسک
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [Authorize]
+    [HttpPost("done-todo")]
+    [Description("انجام تسک")]
+    public async Task<IActionResult> DoneTodo([FromBody] DoneTodoRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new DoneTodoRequest
+        {
+            Id = request.Id
+        });
+
+        if (response.Status.HasError) return BadRequest(response);
+
+        return Ok(response);
+    }
+
+    /// <summary>
     ///     دريافت همه تسک های کاربر
     /// </summary>
     /// <param name="request"></param>

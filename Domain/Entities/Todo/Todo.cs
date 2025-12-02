@@ -115,5 +115,13 @@ public class Todo : BaseEntity<Guid>
         IsApproved = true;
     }
 
+    /// <summary>
+    ///     متد تایید
+    /// </summary>
+    public void SetDone()
+    {
+        IsDone = true;
+    }
+
     #endregion
 }
