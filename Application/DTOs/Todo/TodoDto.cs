@@ -61,6 +61,11 @@ public class TodoDto
     public string CreatedAt { get; set; }
 
     /// <summary>
+    ///     تاریخ انجام
+    /// </summary>
+    public string? DoneAt { get; set; }
+
+    /// <summary>
     ///     آی دی پروژه
     /// </summary>
     public Guid ProjectRef { get; set; }

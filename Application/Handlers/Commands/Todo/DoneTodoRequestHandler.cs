@@ -48,6 +48,10 @@ public class DoneTodoRequestHandler : IRequestHandler<DoneTodoRequest, ApiRespon
         {
             await _todoRepository.DoneAsync(request.Id, cancellationToken);
 
+            todo.DoneAt = DateTime.UtcNow;
+
+            await _todoRepository.UpdateAsync(todo, cancellationToken);
+
             return new ApiResponse<DoneTodoRequestResponse>
             {
                 Status = new StatusResponse(false),

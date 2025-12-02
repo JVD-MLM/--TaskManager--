@@ -49,7 +49,8 @@ public class MappingProfile : Profile
 
         CreateMap<Todo, TodoDto>()
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt.ToPersianDateTime()))
-            .ForMember(dest => dest.DeadLine, opt => opt.MapFrom(src => src.DeadLine.ToPersianDateTime()));
+            .ForMember(dest => dest.DeadLine, opt => opt.MapFrom(src => src.DeadLine.ToPersianDateTime()))
+            .ForMember(dest => dest.DoneAt, opt => opt.MapFrom(src => src.DoneAt.ToPersianDateTime()));
 
         #endregion
 

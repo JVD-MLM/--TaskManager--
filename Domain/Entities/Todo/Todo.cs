@@ -34,6 +34,11 @@ public class Todo : BaseEntity<Guid>
     public bool IsDone { get; set; }
 
     /// <summary>
+    ///     تاریخ انجام
+    /// </summary>
+    public DateTime? DoneAt { get; set; }
+
+    /// <summary>
     ///     تایید شده / نشده
     /// </summary>
     public bool IsApproved { get; set; }
