@@ -112,7 +112,7 @@ public class ProjectController : ControllerBase
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [Authorize]
+    //[Authorize]
     [HttpPost("edit-project")]
     [Description("ويرايش پروژه")]
     public async Task<IActionResult> EditProject([FromBody] UpdateProjectRequest request,
@@ -123,7 +123,8 @@ public class ProjectController : ControllerBase
             Id = request.Id,
             Title = request.Title,
             Description = request.Description,
-            IsComplete = request.IsComplete
+            IsComplete = request.IsComplete,
+            UserRefs = request.UserRefs
         });
 
         if (response.Status.HasError) return BadRequest(response);

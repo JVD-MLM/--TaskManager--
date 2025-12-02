@@ -28,4 +28,9 @@ public class UpdateProjectRequest : IRequest<ApiResponse<UpdateProjectRequestRes
     ///     کامل شده / نشده
     /// </summary>
     public bool IsComplete { get; set; }
+
+    /// <summary>
+    ///     آی دی کاربر
+    /// </summary>
+    public List<Guid> UserRefs { get; set; } = new();
 }
