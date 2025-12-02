@@ -33,6 +33,11 @@ public class TodoDto
     /// <summary>
     ///     تایید شده / نشده
     /// </summary>
+    public bool IsDone { get; set; }
+
+    /// <summary>
+    ///     تایید شده / نشده
+    /// </summary>
     public bool IsApproved { get; set; }
 
     /// <summary>
