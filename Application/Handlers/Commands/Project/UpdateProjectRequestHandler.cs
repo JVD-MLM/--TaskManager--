@@ -42,7 +42,7 @@ public class
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var project = await _projectRepository.GetAsync(request.Id, cancellationToken);
@@ -73,7 +73,7 @@ public class
         return new ApiResponse<UpdateProjectRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = null
+            Result = null
         };
     }
 }

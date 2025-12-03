@@ -44,7 +44,7 @@ public class
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var isAdmin = _authService.CurrentUserIsInRole("Admin");
@@ -79,7 +79,7 @@ public class
         return new ApiResponse<CreateProjectRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new CreateProjectRequestResponse
+            Result = new CreateProjectRequestResponse
             {
                 Id = newProject.Id
             }

@@ -31,7 +31,7 @@ public class SignOutRequestHandler : IRequestHandler<SignOutRequest, ApiResponse
             return new ApiResponse<SignOutRequestResponse>
             {
                 Status = new StatusResponse(true),
-                Data = null
+                Result = null
             };
 
         var token = request.Token.TrimStart();
@@ -64,7 +64,7 @@ public class SignOutRequestHandler : IRequestHandler<SignOutRequest, ApiResponse
         return new ApiResponse<SignOutRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = null
+            Result = null
         };
     }
 }

@@ -43,7 +43,7 @@ public class GetAllUsersRequestHandler : IRequestHandler<GetAllUsersRequest, Api
         return new ApiResponse<GetAllUsersRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllUsersRequestResponse
+            Result = new GetAllUsersRequestResponse
             {
                 Items = result
             }

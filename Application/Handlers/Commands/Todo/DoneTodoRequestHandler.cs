@@ -37,7 +37,7 @@ public class DoneTodoRequestHandler : IRequestHandler<DoneTodoRequest, ApiRespon
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var todo = await _todoRepository.GetAsync(request.Id, cancellationToken);
@@ -55,7 +55,7 @@ public class DoneTodoRequestHandler : IRequestHandler<DoneTodoRequest, ApiRespon
             return new ApiResponse<DoneTodoRequestResponse>
             {
                 Status = new StatusResponse(false),
-                Data = null
+                Result = null
             };
         }
 
@@ -65,7 +65,7 @@ public class DoneTodoRequestHandler : IRequestHandler<DoneTodoRequest, ApiRespon
             {
                 Errors = new List<string> { "هر کاربر تنها می تواند تسک خود را به انجام شده تغییر دهد" }
             },
-            Data = null
+            Result = null
         };
     }
 }

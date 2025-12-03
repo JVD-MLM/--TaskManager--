@@ -32,7 +32,7 @@ public class GetAllTodosRequestHandler : IRequestHandler<GetAllTodosRequest, Api
         return new ApiResponse<GetAllTodosRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllTodosRequestResponse
+            Result = new GetAllTodosRequestResponse
             {
                 Items = result
             }

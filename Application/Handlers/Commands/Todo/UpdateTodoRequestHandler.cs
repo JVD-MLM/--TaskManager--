@@ -33,7 +33,7 @@ public class UpdateTodoRequestHandler : IRequestHandler<UpdateTodoRequest, ApiRe
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var todo = await _todoRepository.GetAsync(request.Id, cancellationToken);
@@ -48,7 +48,7 @@ public class UpdateTodoRequestHandler : IRequestHandler<UpdateTodoRequest, ApiRe
         return new ApiResponse<UpdateTodoRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = null
+            Result = null
         };
     }
 }

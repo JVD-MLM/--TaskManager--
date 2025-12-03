@@ -35,7 +35,7 @@ public class GetAllProjectsByFilterRequestHandler : IRequestHandler<GetAllProjec
         return new ApiResponse<GetAllProjectsByFilterRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllProjectsByFilterRequestResponse
+            Result = new GetAllProjectsByFilterRequestResponse
             {
                 Items = result
             }

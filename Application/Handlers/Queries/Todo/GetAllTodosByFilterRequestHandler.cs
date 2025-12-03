@@ -35,7 +35,7 @@ public class GetAllTodosByFilterRequestHandler : IRequestHandler<GetAllTodosByFi
         return new ApiResponse<GetAllTodosByFilterRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllTodosByFilterRequestResponse
+            Result = new GetAllTodosByFilterRequestResponse
             {
                 Items = result
             }

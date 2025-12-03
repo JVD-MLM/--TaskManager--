@@ -40,7 +40,7 @@ public class
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var todos = await _todoRepository.GetAllTodosByUser(request.Id, cancellationToken);
@@ -50,7 +50,7 @@ public class
         return new ApiResponse<GetAllTodosByUserRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllTodosByUserRequestResponse
+            Result = new GetAllTodosByUserRequestResponse
             {
                 Items = result
             }

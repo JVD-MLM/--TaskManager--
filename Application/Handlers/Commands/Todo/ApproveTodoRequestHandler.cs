@@ -33,7 +33,7 @@ public class ApproveTodoRequestHandler : IRequestHandler<ApproveTodoRequest, Api
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         await _todoRepository.ApproveAsync(request.Id, cancellationToken);
@@ -41,7 +41,7 @@ public class ApproveTodoRequestHandler : IRequestHandler<ApproveTodoRequest, Api
         return new ApiResponse<ApproveTodoRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = null
+            Result = null
         };
     }
 }

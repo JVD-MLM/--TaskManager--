@@ -37,7 +37,7 @@ public class GetTodoRequestHandler : IRequestHandler<GetTodoRequest, ApiResponse
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var todo = await _todoRepository.GetAsync(request.Id, cancellationToken);
@@ -47,7 +47,7 @@ public class GetTodoRequestHandler : IRequestHandler<GetTodoRequest, ApiResponse
         return new ApiResponse<GetTodoRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetTodoRequestResponse
+            Result = new GetTodoRequestResponse
             {
                 Item = result
             }

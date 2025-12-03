@@ -59,7 +59,7 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
             return new ApiResponse<SignInRequestResponse>
             {
                 Status = new StatusResponse(false),
-                Data = new SignInRequestResponse
+                Result = new SignInRequestResponse
                 {
                     NationalCode = user.NationalCode,
                     FirstName = user.FirstName ?? "",
@@ -77,7 +77,7 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, ApiResponse<S
             {
                 Errors = new List<string> { "کاربر یافت نشد" }
             },
-            Data = null
+            Result = null
         };
     }
 }

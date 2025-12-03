@@ -37,7 +37,7 @@ public class CreateTodoRequestHandler : IRequestHandler<CreateTodoRequest, ApiRe
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var newTodo = _mapper.Map<Domain.Entities.Todo.Todo>(request);
@@ -49,7 +49,7 @@ public class CreateTodoRequestHandler : IRequestHandler<CreateTodoRequest, ApiRe
         return new ApiResponse<CreateTodoRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new CreateTodoRequestResponse
+            Result = new CreateTodoRequestResponse
             {
                 Id = newTodo.Id
             }

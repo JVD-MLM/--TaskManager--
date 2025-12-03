@@ -39,7 +39,7 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList() // ارور هاي validation
                 },
-                Data = null
+                Result = null
             };
 
         var user = _mapper.Map<ApplicationUser>(request);
@@ -55,7 +55,7 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
             return new ApiResponse<SignUpRequestResponse>
             {
                 Status = new StatusResponse(false),
-                Data = null
+                Result = null
             };
         }
 
@@ -65,7 +65,7 @@ public class SignUpRequestHandler : IRequestHandler<SignUpRequest, ApiResponse<S
             {
                 Errors = createUser.Errors.Select(e => e.Description).ToList() // ارور هاي identity
             },
-            Data = null
+            Result = null
         };
     }
 }

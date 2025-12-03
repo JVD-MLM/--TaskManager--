@@ -33,7 +33,7 @@ public class DeleteTodoRequestHandler : IRequestHandler<DeleteTodoRequest, ApiRe
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         await _todoRepository.DeleteAsync(request.Id, cancellationToken);
@@ -41,7 +41,7 @@ public class DeleteTodoRequestHandler : IRequestHandler<DeleteTodoRequest, ApiRe
         return new ApiResponse<DeleteTodoRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = null
+            Result = null
         };
     }
 }

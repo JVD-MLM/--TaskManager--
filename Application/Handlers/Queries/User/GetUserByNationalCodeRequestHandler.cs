@@ -43,7 +43,7 @@ public class GetUserByNationalCodeRequestHandler : IRequestHandler<GetUserByNati
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var user = await _userRepository.GetAsync(request.NationalCode, cancellationToken);
@@ -57,7 +57,7 @@ public class GetUserByNationalCodeRequestHandler : IRequestHandler<GetUserByNati
         return new ApiResponse<GetUserByNationalCodeRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetUserByNationalCodeRequestResponse
+            Result = new GetUserByNationalCodeRequestResponse
             {
                 Item = result
             }

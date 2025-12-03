@@ -39,7 +39,7 @@ public class UpdateUserRequestHandler : IRequestHandler<UpdateUserRequest, ApiRe
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var user = await _userRepository.GetAsync(request.Id, cancellationToken);
@@ -57,7 +57,7 @@ public class UpdateUserRequestHandler : IRequestHandler<UpdateUserRequest, ApiRe
                     {
                         Errors = result.Errors.Select(e => e.Description).ToList() // ارور هاي identity
                     },
-                    Data = null
+                    Result = null
                 };
         }
 
@@ -78,7 +78,7 @@ public class UpdateUserRequestHandler : IRequestHandler<UpdateUserRequest, ApiRe
         return new ApiResponse<UpdateUserRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = null
+            Result = null
         };
     }
 }

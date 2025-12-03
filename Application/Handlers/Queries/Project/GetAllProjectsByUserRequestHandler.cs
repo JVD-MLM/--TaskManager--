@@ -39,7 +39,7 @@ public class GetAllProjectsByUserRequestHandler : IRequestHandler<GetAllProjects
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var projects = await _projectRepository.GetAllProjectsByUser(request.Id, cancellationToken);
@@ -49,7 +49,7 @@ public class GetAllProjectsByUserRequestHandler : IRequestHandler<GetAllProjects
         return new ApiResponse<GetAllProjectsByUserRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllProjectsByUserRequestResponse
+            Result = new GetAllProjectsByUserRequestResponse
             {
                 Items = result
             }

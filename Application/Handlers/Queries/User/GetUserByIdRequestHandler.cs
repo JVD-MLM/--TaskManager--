@@ -42,7 +42,7 @@ public class GetUserByIdRequestHandler : IRequestHandler<GetUserByIdRequest, Api
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var user = await _userRepository.GetAsync(request.Id, cancellationToken);
@@ -56,7 +56,7 @@ public class GetUserByIdRequestHandler : IRequestHandler<GetUserByIdRequest, Api
         return new ApiResponse<GetUserByIdRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetUserByIdRequestResponse
+            Result = new GetUserByIdRequestResponse
             {
                 Item = result
             }

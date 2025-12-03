@@ -38,7 +38,7 @@ public class GetProjectRequestHandler : IRequestHandler<GetProjectRequest, ApiRe
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var project = await _projectRepository.GetAsync(request.Id, cancellationToken);
@@ -48,7 +48,7 @@ public class GetProjectRequestHandler : IRequestHandler<GetProjectRequest, ApiRe
         return new ApiResponse<GetProjectRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetProjectRequestResponse
+            Result = new GetProjectRequestResponse
             {
                 Item = result
             }

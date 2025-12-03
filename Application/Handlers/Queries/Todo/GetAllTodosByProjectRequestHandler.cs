@@ -39,7 +39,7 @@ public class GetAllTodosByProjectRequestHandler : IRequestHandler<GetAllTodosByP
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         var todos = await _todoRepository.GetTodosByProject(request.ProjectId, cancellationToken);
@@ -49,7 +49,7 @@ public class GetAllTodosByProjectRequestHandler : IRequestHandler<GetAllTodosByP
         return new ApiResponse<GetAllTodosByProjectRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllTodosByProjectRequestResponse
+            Result = new GetAllTodosByProjectRequestResponse
             {
                 Items = result
             }

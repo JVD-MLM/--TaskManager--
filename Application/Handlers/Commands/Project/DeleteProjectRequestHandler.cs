@@ -34,7 +34,7 @@ public class
                 {
                     Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 },
-                Data = null
+                Result = null
             };
 
         await _projectRepository.DeleteAsync(request.Id, cancellationToken);
@@ -42,7 +42,7 @@ public class
         return new ApiResponse<DeleteProjectRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = null
+            Result = null
         };
     }
 }

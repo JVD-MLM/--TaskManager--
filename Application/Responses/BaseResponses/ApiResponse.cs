@@ -14,5 +14,5 @@ public class ApiResponse<T>
     /// <summary>
     ///     دیتای Api
     /// </summary>
-    public T Data { get; set; }
+    public T Result { get; set; }
 }

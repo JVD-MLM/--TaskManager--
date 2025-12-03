@@ -33,7 +33,7 @@ public class
         return new ApiResponse<GetAllProjectsRequestResponse>
         {
             Status = new StatusResponse(false),
-            Data = new GetAllProjectsRequestResponse
+            Result = new GetAllProjectsRequestResponse
             {
                 Items = result
             }
