@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TaskManager.Application.Utilities;
 
