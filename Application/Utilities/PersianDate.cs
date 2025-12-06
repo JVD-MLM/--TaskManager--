@@ -22,7 +22,7 @@ public static class PersianDate
         var minute = pc.GetMinute(local);
         var second = pc.GetSecond(local);
 
-        return $"{year:0000}/{month:00}/{day:00} {hour:00}:{minute:00}:{second:00}";
+        return $"{year:0000}/{month:00}/{day:00}";
     }
 
     public static string ToPersianDateTime(this DateTime? date) // برای DateTime?
