@@ -40,11 +40,11 @@ public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
             .WithMessage("کاربر والد یافت نشد");
 
         RuleFor(x => x.Password)
-            .NotEmpty().WithMessage("رمز عبور الزامی است")
-            .MinimumLength(8).WithMessage("رمز عبور باید حداقل 8 کاراکتر باشد");
+            .MinimumLength(8).WithMessage("رمز عبور باید حداقل 8 کاراکتر باشد")
+            .When(x => !string.IsNullOrWhiteSpace(x.Password));
 
         RuleFor(x => x.RePassword)
-            .NotEmpty().WithMessage("تکرار رمز عبور الزامی است")
-            .Equal(x => x.Password).WithMessage("رمز عبور و تکرار آن مطابقت ندارند");
+            .Equal(x => x.Password).WithMessage("رمز عبور و تکرار آن مطابقت ندارند")
+            .When(x => !string.IsNullOrWhiteSpace(x.Password));
     }
 }
