@@ -85,7 +85,7 @@ public class UserController : ControllerBase
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    //[Authorize(Roles = "Admin,Manager")]
+    [Authorize(Roles = "Admin,Manager")]
     [HttpPost("edit-user")]
     [Description("ويرايش کاربر")]
     public async Task<IActionResult> EditUser([FromBody] UpdateUserRequest request,
